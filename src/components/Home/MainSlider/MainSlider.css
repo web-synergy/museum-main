@@ -1,0 +1,21 @@
+.swiper_slide2 {
+  width: 288px;
+  height: 180px;
+}
+
+@media (min-width: 768px) {
+  .swiper_slide2 {
+    width: 510px;
+    height: 283px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .swiper_slide2 {
+    content: '';
+    width: 900px;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+  }
+}

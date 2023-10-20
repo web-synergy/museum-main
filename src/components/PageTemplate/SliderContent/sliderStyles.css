@@ -1,0 +1,67 @@
+.historySwiper {
+  position: static;
+}
+
+.historySwiper .swiper-button-prev,
+.historySwiper .swiper-button-next {
+  color: #151514;
+  top: calc(100% - 16px);
+  z-index: 1000;
+  width: 25px;
+  height: 25px;
+
+  @media (min-width: 768px) {
+    width: 44px;
+    height: 44px;
+    top: calc(100% - 26px);
+    &::after {
+      font-size: 28px !important;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    top: calc(100% - 40px);
+  }
+}
+
+.historySwiper .swiper-button-prev {
+  left: calc(50% - 78px);
+
+  @media (min-width: 768px) {
+    left: calc(50% - 110px);
+  }
+}
+
+.historySwiper .swiper-button-next {
+  right: calc(50% - 78px);
+
+  @media (min-width: 768px) {
+    right: calc(50% - 110px);
+  }
+}
+
+.historySwiper .swiper-button-prev::after,
+.historySwiper .swiper-button-next::after {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.historySwiper .swiper-pagination {
+  top: calc(100% - 36px);
+
+  @media (min-width: 1280px) {
+    top: calc(100% - 50px);
+  }
+}
+
+.historySwiper .swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  margin: 0 1.6px !important; /* added */
+
+  @media (min-width: 767px) {
+    width: 8px;
+    height: 8px;
+    margin: 0 2px !important;
+  }
+}

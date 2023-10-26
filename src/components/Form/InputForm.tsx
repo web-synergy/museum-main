@@ -71,7 +71,7 @@ const InputForm: FC<InputFormProps> = ({ placeholder, control, name, alert, labe
             marginTop: '8px',
           }}>
           <SvgSpriteIcon svgSpriteId="info_icon" />
-          <FormHelperText sx={{ margin: '0px', color: { color }, fontSize: '16px' }}>{error.message}</FormHelperText>
+          <FormHelperText sx={{ margin: '0px', color: { color }, fontSize: '14px' }}>{error.message}</FormHelperText>
         </Box>
       )}
     </Box>

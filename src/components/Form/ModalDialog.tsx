@@ -1,6 +1,6 @@
 import { Box, Dialog, IconButton, Typography } from '@mui/material';
-import SvgSpriteIcon from '../Common/SvgSpriteIcon';
 import Section from '../Common/Section';
+import SvgSpriteIcon from '../Common/SvgSpriteIcon';
 interface IModalDialog {
   handleClose: () => void;
   open: boolean;
@@ -44,10 +44,12 @@ export default function ModalDialog({ handleClose, open }: IModalDialog) {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Typography sx={{ fontSize: '44px' }} variant="body2Kyiv">
+          <Typography sx={{ fontSize: { xs: '32px', md: '40px' } }} variant="body2Kyiv">
             Дякуємо!
           </Typography>
-          <Typography variant="navigationRale">Ваш запит відправлено.</Typography>
+          <Typography sx={{ fontSize: { xs: '14px', md: '18px' } }} variant="navigationRale">
+            Ваш запит відправлено.
+          </Typography>
         </Box>
       </Section>
     </Dialog>

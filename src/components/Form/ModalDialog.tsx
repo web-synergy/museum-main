@@ -28,11 +28,12 @@ export default function ModalDialog({ handleClose, open }: IModalDialog) {
           aria-label="close form"
           color="inherit"
           sx={{
+            p: 0,
             position: 'absolute',
             top: '16px',
             right: '16px',
           }}>
-          <SvgSpriteIcon fontSize="medium" svgSpriteId="burgerOpen_icon" />
+          <SvgSpriteIcon svgSpriteId="burgerOpen_icon" />
         </IconButton>
         <Box
           sx={{

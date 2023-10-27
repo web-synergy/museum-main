@@ -1,13 +1,13 @@
+import { sendFeedbackForm } from '@/api';
+import { IFormInput } from '@/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Dialog, IconButton, Typography } from '@mui/material';
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import ButtonWithIcon from '../Common/ButtonWithIcon';
 import SvgSpriteIcon from '../Common/SvgSpriteIcon';
 import InputForm from './InputForm';
-import ButtonWithIcon from '../Common/ButtonWithIcon';
 import { validateSchema } from './Validation';
-import { IFormInput } from '@/types';
-import { sendFeedbackForm } from '@/api';
 
 interface FeedBackFormProps {
   handleClose: () => void;
@@ -47,7 +47,7 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
         '& .MuiDialog-container': {
           '& .MuiPaper-root': {
             width: '100%',
-            maxWidth: { xs: '100%', md: '540px', lg: '568px' },
+            maxWidth: { xs: '90%', md: '540px', lg: '568px' },
           },
         },
       }}
@@ -73,6 +73,7 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
           aria-label="close form"
           color="inherit"
           sx={{
+            p: 0,
             position: 'absolute',
             top: '24px',
             right: '24px',
@@ -147,10 +148,16 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginTop: { xs: '24px' },
+              marginTop: '52px',
               marginBottom: { xs: '48px', md: '24px' },
             }}>
-            <ButtonWithIcon title="Відправити" type="submit" disabled={!isValid} svgSpriteId="send_icon" />
+            <ButtonWithIcon
+              sx={{ width: { xs: '228px', md: '220px', lg: '328px' } }}
+              title="Відправити"
+              type="submit"
+              disabled={!isValid}
+              svgSpriteId="send_icon"
+            />
           </Box>
         </form>
       </Box>

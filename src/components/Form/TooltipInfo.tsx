@@ -1,17 +1,19 @@
-import { FC } from 'react';
 import { IconButton, Tooltip, TooltipProps, Typography, tooltipClasses } from '@mui/material';
 import { Box, styled } from '@mui/system';
+import { FC } from 'react';
 import SvgSpriteIcon from '../Common/SvgSpriteIcon';
 
-const MyTooltip = styled(({ className, ...props }: TooltipProps) => <Tooltip {...props} arrow classes={{ popper: className }} />)(
+const MyTooltip = styled(({ className, ...props }: TooltipProps) => <Tooltip {...props} classes={{ popper: className }} />)(
   ({ theme }) => ({
-    width: '190px',
+    maxWidth: '192px',
     opacity: 1,
     [theme.breakpoints.up('md')]: {
-      width: '292px',
+      maxWidth: '292px',
     },
     [`& .${tooltipClasses.tooltip}`]: {
       color: theme.palette.common.black,
+      position: 'relative',
+      bottom: '-16px',
     },
   })
 );
@@ -22,12 +24,13 @@ interface TooltipInfoProps {
 
 const TooltipInfo: FC<TooltipInfoProps> = ({ alert }) => {
   return (
-    <Box sx={{ position: 'absolute', right: '8px', top: { xs: '38px', lg: '40px' } }}>
+    <Box sx={{ position: 'absolute', right: '8px', top: { xs: '32px', lg: '33px' } }}>
       <MyTooltip
+        // leaveDelay={200}
         enterTouchDelay={1}
         placement={'top-start'}
         title={
-          <Typography variant="body1" sx={{ fontSize: { xs: '14px', md: '16px' } }}>
+          <Typography variant="body1" sx={{ lineHeight: '16.8px', fontSize: { xs: '14px', md: '16px' } }}>
             {alert}
           </Typography>
         }>

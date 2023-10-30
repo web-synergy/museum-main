@@ -88,7 +88,7 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
             textAlign: 'center',
             width: { xs: '230px', md: '334px' },
             fontSize: { xs: '18px', md: '24px' },
-            lineHeight: 'normal',
+            lineHeight: { xs: '24px', md: '28px' },
             letterSpacing: { xs: '-0.36px', md: '-0.48px' },
             fontWeight: { xs: '700', md: '500' },
           }}>

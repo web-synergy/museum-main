@@ -26,7 +26,7 @@ const TooltipInfo: FC<TooltipInfoProps> = ({ alert }) => {
   return (
     <Box sx={{ position: 'absolute', right: '8px', top: { xs: '32px', lg: '33px' } }}>
       <MyTooltip
-        // leaveDelay={200}
+        leaveDelay={200}
         enterTouchDelay={1}
         placement={'top-start'}
         title={

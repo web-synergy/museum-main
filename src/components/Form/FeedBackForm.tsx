@@ -84,7 +84,7 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
         <Typography
           sx={{
             m: '0 auto',
-            pt: { xs: 10, md: 9 },
+            pt: { xs: 10, lg: 9 },
             textAlign: 'center',
             width: { xs: '230px', md: '334px' },
             fontSize: { xs: '18px', md: '24px' },

@@ -6,38 +6,48 @@ import Section from '../Common/Section';
 import { dataInfo } from './fakeData';
 import Banner from './Banner';
 import { WrapperImg } from './styles';
-import { truncateDescription } from '@/helpers/truncateString';
+import { truncateDescription } from '../../helpers/truncateString';
 import Loader from '../Loader/Loader';
+import { getEvents } from '@/api';
 
 const Events: FC = () => {
-  const theme = useTheme();
-
-  const [cardsEvent, setItems] = useState(dataInfo);
+  const [cardsEvent, setСardsEvent] = useState(dataInfo);
   const [visibleItems, setVisibleItems] = useState(3);
+  const theme = useTheme();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
+    const fetchData = async () => {
+      try {
+        const response = await getEvents(30, 0);
+        console.log(response.data);
+        setСardsEvent(response.data);
 
-    return () => clearTimeout(timer);
-  }, []);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
 
-  useEffect(() => {
-    setItems(dataInfo);
+    fetchData();
   }, []);
 
   const handlerLoadMore = () => {
     setVisibleItems((prevValue) => prevValue + 3);
   };
 
+  const bannerEvent = dataInfo[0];
+
+  const otherEvents = dataInfo.slice(1);
+
   return (
     <Section variant="light">
       {loading && <Loader visible={loading} />}
+
       {!loading && (
         <>
-          <Banner />
+          <Banner event={bannerEvent} />
           <Box
             sx={{
               display: 'flex',
@@ -46,9 +56,9 @@ const Events: FC = () => {
               marginTop: { xs: '32px', md: '44px' },
               paddingBottom: { xs: '40px', md: '32px' },
             }}>
-            {cardsEvent.slice(0, visibleItems).map((item, index) => (
+            {otherEvents.slice(0, visibleItems).map((item, index) => (
               <Container key={index} sx={{ borderBottom: `1px solid ${theme.palette.gray.main} ` }}>
-                <Box key={index} sx={{ padding: { xs: '24px 0' } }}>
+                <Box sx={{ padding: { xs: '24px 0' } }}>
                   <Box
                     sx={{
                       display: 'grid',
@@ -86,7 +96,7 @@ const Events: FC = () => {
             ))}
           </Box>
           <Box sx={{ width: '100%', textAlign: 'center', marginBottom: { xs: '60px', md: '80px' } }}>
-            {visibleItems < cardsEvent.length && (
+            {visibleItems < otherEvents.length && (
               <Button sx={{ width: '248px' }} onClick={handlerLoadMore} variant="secondary">
                 Показати більше
               </Button>

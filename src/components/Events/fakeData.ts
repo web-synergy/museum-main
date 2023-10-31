@@ -1,8 +1,22 @@
 export const dataInfo = [
   {
-    id: 100,
     mainTitle: 'Події музею',
-    // cardTitle: 'Відкриття персональної виставки Ірен VODOLAZ “UNDER FIRE” ”',
+    cardTitle: 'Виставка робіт Дмитра Чернобая “Війна ще триває”',
+    dataPerformance: '10.08.2023 – 06.09.2023',
+    description:
+      'Ця виставка-розповідь Дмитра Чернобая, простого хлопця з Маріуполя, що пройшов через пекло, але знайшов в собі сили творити мистецтво.',
+    img: 'https://nsju.org/wp-content/uploads/2023/06/afisha-topraq-muzej-kavaleridze.jpg',
+  },
+  {
+    mainTitle: 'Події музею',
+    cardTitle: 'Виставка Анатолія Буртового “Живопис, графіка, левкас”',
+    dataPerformance: '10.08.2023 – 06.09.2023',
+    description:
+      'На виставці, присвяченій 40-річчю творчої діяльності майстра, були представлені роботи від юнацького періоду до творів сьогодення.',
+    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT8xL69W12pjh2hGmpVzR1d-EpOS0KT4N_8j0F1accj4T3N-qKrzAoqnTkp689jmRoIU4&usqp=CAU',
+  },
+  {
+    mainTitle: 'Події музею',
     cardTitle: 'Одне непрочитане. Alona Kovalerenko',
     dataPerformance: '10.08.2023 – 06.09.2023',
     description:

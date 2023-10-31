@@ -1,18 +1,25 @@
 import { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Typography, Button, useMediaQuery, useTheme } from '@mui/material';
-
+import { Typography, Button, useMediaQuery } from '@mui/material';
+import { theme } from '../../theme';
 import { BannerWrapper, ContentBox, TextBox, ButtonBox } from './styles';
-import { truncateDescription } from '@/helpers/truncateString';
+import { truncateDescription } from '../../helpers/truncateString';
 
-const Banner: FC = () => {
-  const theme = useTheme();
+interface MuseumEventProps {
+  mainTitle: string;
+  cardTitle: string;
+  dataPerformance: string;
+  description: string;
+  img: string;
+}
+
+const Banner: FC<{ event: MuseumEventProps }> = ({ event }) => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const buttonText = isSmallScreen ? 'Детальніше' : 'Детальніше про подію';
 
   return (
-    <BannerWrapper>
+    <BannerWrapper img={event.img}>
       <ContentBox>
         <TextBox>
           <Typography
@@ -20,17 +27,14 @@ const Banner: FC = () => {
             sx={{
               color: theme.palette.text.primary,
             }}>
-            {truncateDescription('Виставка робіт Дмитра Чернобая “Війна ще триває”', 100)}
+            {truncateDescription(event.cardTitle, 100)}
           </Typography>
           <Typography
             variant="caption"
             sx={{
               color: theme.palette.text.primary,
             }}>
-            {truncateDescription(
-              'Ця виставка-розповідь Дмитра Чернобая, простого хлопця з Маріуполя, що пройшов через пекло, але знайшов в собі сили творити мистецтво.',
-              200
-            )}
+            {truncateDescription(event.description, 200)}
           </Typography>
         </TextBox>
         <ButtonBox>

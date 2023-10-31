@@ -50,7 +50,13 @@ const InputForm: FC<InputFormProps> = ({ placeholder, control, name, alert, labe
     <Box sx={{ position: 'relative', color: { color } }}>
       <InputLabel
         htmlFor={name}
-        sx={{ p: '0px', marginBottom: '8px', color: 'inherit', fontSize: { xs: '16px', lg: '18px', fontWeight: '600' } }}>
+        sx={{
+          p: '0px',
+          marginBottom: '8px',
+          color: 'inherit',
+          lineHeight: 'normal',
+          fontSize: { xs: '16px', lg: '18px', fontWeight: '600' },
+        }}>
         {label}
       </InputLabel>
       <Controller
@@ -61,7 +67,8 @@ const InputForm: FC<InputFormProps> = ({ placeholder, control, name, alert, labe
             id={name}
             sx={{
               '& .MuiInputBase-input.MuiOutlinedInput-input': {
-                padding: '0 28px 0 0',
+                height: '19px',
+
                 '&::placeholder': {
                   fontSize: { xs: '14px', md: '16px' },
                 },
@@ -98,10 +105,10 @@ const InputForm: FC<InputFormProps> = ({ placeholder, control, name, alert, labe
             justifyContent: 'flex-start',
             gap: 1,
             color: { color },
-            marginTop: '10px',
+            marginTop: 1,
           }}>
           <SvgSpriteIcon sx={{ fontSize: '20px' }} svgSpriteId="info_icon" />
-          <FormHelperText sx={{ margin: '0px', color: { color }, fontSize: '14px' }}>{error.message}</FormHelperText>
+          <FormHelperText sx={{ lineHeight: 'normal', margin: '0px', color: { color }, fontSize: '14px' }}>{error.message}</FormHelperText>
         </Box>
       )}
     </Box>

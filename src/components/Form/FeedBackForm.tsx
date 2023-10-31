@@ -84,13 +84,13 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
         <Typography
           sx={{
             m: '0 auto',
-            pt: 10,
+            pt: { xs: 10, lg: 9 },
             textAlign: 'center',
             width: { xs: '230px', md: '334px' },
             fontSize: { xs: '18px', md: '24px' },
-            lineHeight: { xs: '24px', md: '36px' },
+            lineHeight: { xs: '24px', md: '28px' },
             letterSpacing: { xs: '-0.36px', md: '-0.48px' },
-            fontWeight: '700',
+            fontWeight: { xs: '700', md: '500' },
           }}>
           Ми будемо раді отримати від Вас повідомлення!
         </Typography>
@@ -135,7 +135,7 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
               control={control}
               error={errors.message}
               isMulti={true}
-              rows={6}
+              rows={7.51}
               placeholder={'Введіть Ваше повідомлення'}
               label={'Текст повідомлення*'}
               name={'message'}

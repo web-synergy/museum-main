@@ -6,11 +6,9 @@ import { BannerWrapper, ContentBox, TextBox, ButtonBox } from './styles';
 import { truncateDescription } from '../../helpers/truncateString';
 
 interface MuseumEventProps {
-  mainTitle: string;
-  cardTitle: string;
-  dataPerformance: string;
-  description: string;
-  img: string;
+  title: string;
+  summary: string;
+  banner: string;
 }
 
 const Banner: FC<{ event: MuseumEventProps }> = ({ event }) => {
@@ -19,7 +17,7 @@ const Banner: FC<{ event: MuseumEventProps }> = ({ event }) => {
   const buttonText = isSmallScreen ? 'Детальніше' : 'Детальніше про подію';
 
   return (
-    <BannerWrapper img={event.img}>
+    <BannerWrapper img={event.banner}>
       <ContentBox>
         <TextBox>
           <Typography
@@ -27,14 +25,14 @@ const Banner: FC<{ event: MuseumEventProps }> = ({ event }) => {
             sx={{
               color: theme.palette.text.primary,
             }}>
-            {truncateDescription(event.cardTitle, 100)}
+            {truncateDescription(event.title, 100)}
           </Typography>
           <Typography
             variant="caption"
             sx={{
               color: theme.palette.text.primary,
             }}>
-            {truncateDescription(event.description, 200)}
+            {truncateDescription(event.summary, 200)}
           </Typography>
         </TextBox>
         <ButtonBox>

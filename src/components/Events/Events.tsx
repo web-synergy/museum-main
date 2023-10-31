@@ -3,25 +3,35 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Container, Box, Typography, Button, useTheme } from '@mui/material';
 import ButtonWithIcon from '../Common/ButtonWithIcon';
 import Section from '../Common/Section';
-import { dataInfo } from './fakeData';
+// import { dataInfo } from './fakeData';
 import Banner from './Banner';
 import { WrapperImg } from './styles';
 import { truncateDescription } from '../../helpers/truncateString';
 import Loader from '../Loader/Loader';
 import { getEvents } from '@/api';
 
+interface Event {
+  id: string;
+  title: string;
+  begin: string;
+  summary: string;
+  banner: string;
+}
+
 const Events: FC = () => {
-  const [cardsEvent, setСardsEvent] = useState(dataInfo);
+  const [cardsEvent, setCardsEvent] = useState<Event[]>([]);
   const [visibleItems, setVisibleItems] = useState(3);
   const theme = useTheme();
   const [loading, setLoading] = useState(true);
+
+  console.log(cardsEvent);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getEvents(30, 0);
-        console.log(response.data);
-        setСardsEvent(response.data);
+
+        setCardsEvent(response.data.content);
 
         setLoading(false);
       } catch (error) {
@@ -33,13 +43,15 @@ const Events: FC = () => {
     fetchData();
   }, []);
 
+  console.log(cardsEvent);
+
   const handlerLoadMore = () => {
     setVisibleItems((prevValue) => prevValue + 3);
   };
 
-  const bannerEvent = dataInfo[0];
+  const bannerEvent = cardsEvent[0];
 
-  const otherEvents = dataInfo.slice(1);
+  const otherEvents = cardsEvent.slice(1);
 
   return (
     <Section variant="light">
@@ -56,7 +68,7 @@ const Events: FC = () => {
               marginTop: { xs: '32px', md: '44px' },
               paddingBottom: { xs: '40px', md: '32px' },
             }}>
-            {otherEvents.slice(0, visibleItems).map((item, index) => (
+            {otherEvents.slice(0, visibleItems).map((event, index) => (
               <Container key={index} sx={{ borderBottom: `1px solid ${theme.palette.gray.main} ` }}>
                 <Box sx={{ padding: { xs: '24px 0' } }}>
                   <Box
@@ -66,7 +78,7 @@ const Events: FC = () => {
                       gap: { xs: '16px', md: '24px', lg: '48px' },
                     }}>
                     <WrapperImg>
-                      <img src={item.img} alt="" />
+                      <img src={event.banner} alt="" />
                     </WrapperImg>
                     <Box>
                       <Box
@@ -75,17 +87,17 @@ const Events: FC = () => {
                           flexDirection: 'column',
                           gap: '16px',
                         }}>
-                        <Typography variant="h2">{truncateDescription(item.cardTitle, 100)}</Typography>
+                        <Typography variant="h2">{truncateDescription(event.title, 100)}</Typography>
                         <Typography variant="body1" sx={{ fontWeight: '600' }}>
-                          {item.dataPerformance}
+                          {event.begin}
                         </Typography>
-                        <Typography variant="caption">{truncateDescription(item.description, 150)}</Typography>
+                        <Typography variant="caption">{truncateDescription(event.summary, 150)}</Typography>
                       </Box>
                       <ButtonWithIcon
                         variant="tertiary"
                         component={RouterLink}
                         sx={{ marginTop: '24px' }}
-                        to={dataInfo[index].cardTitle}
+                        to={cardsEvent[index].title}
                         svgSpriteId="breadcrumbsSeparator_icon"
                         title="Читати далі"
                       />

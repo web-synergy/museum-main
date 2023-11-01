@@ -15,17 +15,12 @@ export const BannerWrapper = styled(Box)<BannerWrapperProps>(({ theme, img }) =>
   backgroundRepeat: 'no-repeat',
 
   backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url(${img})`,
-  // [theme.breakpoints.up('xs')]: {
-  //   backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url(${bannerMob})`,
-  // },
   [theme.breakpoints.up('md')]: {
     paddingTop: '216px',
-    // backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url(${bannerTablet})`,
   },
   [theme.breakpoints.up('lg')]: {
     paddingTop: '312px',
     paddingBottom: '44px',
-    // backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url(${bannerDesc})`,
   },
 }));
 
@@ -75,7 +70,5 @@ export const WrapperImg = styled(Box)(() => ({
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-
-    // [theme.breakpoints.up('lg')]: { maxWidth: '100%', height: '100%' },
   },
 }));

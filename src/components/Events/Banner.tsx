@@ -1,18 +1,23 @@
+import { Button, Typography, useMediaQuery } from '@mui/material';
 import { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Typography, Button, useMediaQuery, useTheme } from '@mui/material';
+import { truncateDescription } from '../../helpers/truncateString';
+import { theme } from '../../theme';
+import { BannerWrapper, ButtonBox, ContentBox, TextBox } from './styles';
 
-import { BannerWrapper, ContentBox, TextBox, ButtonBox } from './styles';
-import { truncateDescription } from '@/helpers/truncateString';
+interface MuseumEventProps {
+  title: string;
+  summary: string;
+  banner: string;
+}
 
-const Banner: FC = () => {
-  const theme = useTheme();
+const Banner: FC<{ event: MuseumEventProps }> = ({ event }) => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const buttonText = isSmallScreen ? 'Детальніше' : 'Детальніше про подію';
 
   return (
-    <BannerWrapper>
+    <BannerWrapper img={`http://130.61.247.149/api/images?filename=${event.banner}&type=ORIGINAL`}>
       <ContentBox>
         <TextBox>
           <Typography
@@ -20,23 +25,20 @@ const Banner: FC = () => {
             sx={{
               color: theme.palette.text.primary,
             }}>
-            {truncateDescription('Виставка робіт Дмитра Чернобая “Війна ще триває”', 100)}
+            {truncateDescription(event.title, 100)}
           </Typography>
           <Typography
             variant="caption"
             sx={{
               color: theme.palette.text.primary,
             }}>
-            {truncateDescription(
-              'Ця виставка-розповідь Дмитра Чернобая, простого хлопця з Маріуполя, що пройшов через пекло, але знайшов в собі сили творити мистецтво.',
-              200
-            )}
+            {truncateDescription(event.summary, 200)}
           </Typography>
         </TextBox>
         <ButtonBox>
           <Button
             component={RouterLink}
-            to="/events/event"
+            to={event.title}
             sx={{
               minWidth: { xs: '143px' },
               borderColor: theme.palette.text.primary,

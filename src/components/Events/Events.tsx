@@ -1,7 +1,6 @@
 import { Box, Button, Container, Typography, useTheme } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-// import { VITE_SERVER_URL } from 'vite';
 import { getEvents } from '@/api';
 import { formatDate } from '@/helpers/formatDate';
 import { truncateDescription } from '@/helpers/truncateString';
@@ -51,8 +50,6 @@ const Events: FC = () => {
     setPageSize((prevPage) => prevPage + 3);
   };
 
-  const serverUrl = import.meta.env.VITE_SERVER_URL || '';
-  console.log(serverUrl);
   const bannerEvent = cardsEvent[0];
   const visibleEvents = cardsEvent.slice(1, pageSize);
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IFormInput } from '../types';
+import { IFormInput, IMuseumData } from '../types';
 
 const instance = axios.create({
   baseURL: '/api',
@@ -15,4 +15,7 @@ export const getEvents = (size = 5, page = 1) => {
 
 export const getEventById = (id: string) => {
   return instance.get(`/events/${id}`);
+};
+export const getMuseumData = () => {
+  return instance.get<IMuseumData>('/museum_data');
 };

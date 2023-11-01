@@ -32,12 +32,13 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
     },
     resolver: yupResolver(validateSchema),
   });
-
+  // const sendMessage = useFetch(sendFeedbackForm, true);
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    sendFeedbackForm(data);
-    handleClickButton();
-    handleClose();
-    reset();
+    const response = await sendFeedbackForm(data);
+    console.log(response);
+    // handleClickButton();
+    //   handleClose();
+    //   reset();
   };
 
   return (
@@ -121,7 +122,6 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
               name={'lastName'}
               alert={'Від 2 до 30 символів: букви, дефіс, крапка, апостроф, пробіл'}
             />
-
             <InputForm
               control={control}
               error={errors.email}

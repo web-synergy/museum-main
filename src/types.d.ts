@@ -34,7 +34,14 @@ interface IEvent {
   created: Date; //дата створення події
   content: ContentType[];
 }
-
+export interface IMuseumData {
+  id: string;
+  phoneNumber: string;
+  email: string;
+  subwayRoute: string;
+  busRoute: string;
+  funicularRoute: string;
+}
 export interface IFormInput {
   firstName: string;
   lastName: string;

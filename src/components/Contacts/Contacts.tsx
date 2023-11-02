@@ -1,7 +1,7 @@
 import { getMuseumData } from '@/api';
 import { useFetch } from '@/hooks/useFetch.ts';
 import { Container, Typography } from '@mui/material';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import Section from '../Common/Section.tsx';
 import FeedBackForm from '../Form/FeedBackForm.tsx';
 import ModalDialog from '../Form/ModalDialog.tsx';
@@ -23,17 +23,9 @@ const Contacts: FC = () => {
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
-  // const id = useCallback(() => getEventById('1'), []);
-  const { data, isLoading } = useFetch(getMuseumData);
-  useEffect(() => {
-    const getData = async () => {
-      const response = await getMuseumData();
-      console.log(response);
-    };
-    getData();
-  }, []);
 
-  console.log(data);
+  const { data, isLoading } = useFetch(getMuseumData);
+
   return (
     <>
       <Section variant="light">
@@ -55,14 +47,13 @@ const Contacts: FC = () => {
                   <Title variant="h3">Як нас знайти</Title>
                   <BoxContact>
                     <Paragraph>
-                      <strong>Метро:</strong> до станції «Контрактова площа», далі пройти пішки близько 1 км.
+                      <strong>Метро:</strong> {data?.subwayRoute}
                     </Paragraph>
                     <Paragraph>
-                      <strong>Фунікулер:</strong> від станції «Поштова площа» піднятися до Михайлівської площі, далі пройти по вулиці
-                      Володимирській до Андріївського узвозу, 21.
+                      <strong>Фунікулер:</strong> {data?.funicularRoute}
                     </Paragraph>
                     <Paragraph>
-                      <strong>Автобус:</strong> 114; 119; 18ТР.
+                      <strong>Автобус:</strong> {data?.busRoute}
                     </Paragraph>
                   </BoxContact>
                 </ContactItem>

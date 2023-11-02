@@ -1,43 +1,65 @@
+import { Box, Button, Container, Typography, useTheme } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Container, Box, Typography, Button, useTheme } from '@mui/material';
+import { getEvents } from '@/api';
+import { formatDate } from '@/helpers/formatDate';
+import { truncateDescription } from '@/helpers/truncateString';
 import ButtonWithIcon from '../Common/ButtonWithIcon';
 import Section from '../Common/Section';
-import { dataInfo } from './fakeData';
+import Loader from '../Loader/Loader';
 import Banner from './Banner';
 import { WrapperImg } from './styles';
-import { truncateDescription } from '@/helpers/truncateString';
-import Loader from '../Loader/Loader';
+
+interface Event {
+  id: string;
+  title: string;
+  begin: string;
+  end: string;
+  summary: string;
+  banner: string;
+}
 
 const Events: FC = () => {
+  const [cardsEvent, setCardsEvent] = useState<Event[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [totalEvents, setTotalEvents] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [pageSize, setPageSize] = useState(4);
   const theme = useTheme();
 
-  const [cardsEvent, setItems] = useState(dataInfo);
-  const [visibleItems, setVisibleItems] = useState(3);
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
+    const fetchData = async () => {
+      try {
+        const response = await getEvents(4, currentPage);
+        const { content, totalElements } = response.data;
 
-    return () => clearTimeout(timer);
-  }, []);
+        setCardsEvent((prevEvents) => [...prevEvents, ...content]);
+        setTotalEvents(totalElements);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
 
-  useEffect(() => {
-    setItems(dataInfo);
-  }, []);
+    fetchData();
+  }, [currentPage]);
 
   const handlerLoadMore = () => {
-    setVisibleItems((prevValue) => prevValue + 3);
+    setCurrentPage((prevPage) => prevPage + 1);
+    setPageSize((prevPage) => prevPage + 3);
   };
+
+  const bannerEvent = cardsEvent[0];
+  const visibleEvents = cardsEvent.slice(1, pageSize);
 
   return (
     <Section variant="light">
       {loading && <Loader visible={loading} />}
+
       {!loading && (
         <>
-          <Banner />
+          <Banner event={bannerEvent} />
           <Box
             sx={{
               display: 'flex',
@@ -46,9 +68,9 @@ const Events: FC = () => {
               marginTop: { xs: '32px', md: '44px' },
               paddingBottom: { xs: '40px', md: '32px' },
             }}>
-            {cardsEvent.slice(0, visibleItems).map((item, index) => (
-              <Container key={index} sx={{ borderBottom: `1px solid ${theme.palette.gray.main} ` }}>
-                <Box key={index} sx={{ padding: { xs: '24px 0' } }}>
+            {visibleEvents.slice(0, cardsEvent.length).map((event, index) => (
+              <Container key={event.id} sx={{ borderBottom: `1px solid ${theme.palette.gray.main} ` }}>
+                <Box sx={{ padding: { xs: '24px 0' } }}>
                   <Box
                     sx={{
                       display: 'grid',
@@ -56,7 +78,7 @@ const Events: FC = () => {
                       gap: { xs: '16px', md: '24px', lg: '48px' },
                     }}>
                     <WrapperImg>
-                      <img src={item.img} alt="" />
+                      <img src={`http://130.61.247.149/api/images?filename=${event.banner}&type=ORIGINAL`} alt="" />
                     </WrapperImg>
                     <Box>
                       <Box
@@ -65,17 +87,17 @@ const Events: FC = () => {
                           flexDirection: 'column',
                           gap: '16px',
                         }}>
-                        <Typography variant="h2">{truncateDescription(item.cardTitle, 100)}</Typography>
+                        <Typography variant="h2">{truncateDescription(event.title, 100)}</Typography>
                         <Typography variant="body1" sx={{ fontWeight: '600' }}>
-                          {item.dataPerformance}
+                          {formatDate(event.begin, event.end)}
                         </Typography>
-                        <Typography variant="caption">{truncateDescription(item.description, 150)}</Typography>
+                        <Typography variant="caption">{truncateDescription(event.summary, 150)}</Typography>
                       </Box>
                       <ButtonWithIcon
                         variant="tertiary"
                         component={RouterLink}
                         sx={{ marginTop: '24px' }}
-                        to={dataInfo[index].cardTitle}
+                        to={cardsEvent[index].title}
                         svgSpriteId="breadcrumbsSeparator_icon"
                         title="Читати далі"
                       />
@@ -86,7 +108,7 @@ const Events: FC = () => {
             ))}
           </Box>
           <Box sx={{ width: '100%', textAlign: 'center', marginBottom: { xs: '60px', md: '80px' } }}>
-            {visibleItems < cardsEvent.length && (
+            {currentPage * pageSize < totalEvents && (
               <Button sx={{ width: '248px' }} onClick={handlerLoadMore} variant="secondary">
                 Показати більше
               </Button>

@@ -61,7 +61,6 @@ const Contacts: FC = () => {
                   <Title variant="h3">Написати нам</Title>
                   <ContactButton onClick={handleClickOpen} variant="text">
                     <Typography component="span" variant="body1">
-                      dd
                       {data?.email}
                     </Typography>
                   </ContactButton>

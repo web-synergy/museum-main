@@ -1,17 +1,18 @@
+import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 
 interface LoadingDataResult<T> {
   data: T | null;
   isLoading: boolean;
-  error: Error | null;
+  error: AxiosError | null;
   isFulfilled: boolean;
   eventLoading: (data: any) => void;
 }
 
-export const useFetch = <T>(dataFetcher: (data: any) => Promise<{ data: T }>, event = false): LoadingDataResult<T> => {
+export const useFetch = <T>(dataFetcher: (data: any) => Promise<{ data: T }>, event?: boolean): LoadingDataResult<T> => {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<AxiosError | null>(null);
   const [isFulfilled, setIsFulfilled] = useState<boolean>(false);
 
   const fetchData = async (requestData: any) => {
@@ -22,7 +23,7 @@ export const useFetch = <T>(dataFetcher: (data: any) => Promise<{ data: T }>, ev
       setIsFulfilled(true);
       setIsLoading(false);
     } catch (error: any) {
-      setError(error);
+      setError(error as AxiosError);
       setIsLoading(false);
     }
   };

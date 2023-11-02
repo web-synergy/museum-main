@@ -1,11 +1,13 @@
 import { sendFeedbackForm } from '@/api';
+import { useFetch } from '@/hooks/useFetch';
 import { IFormInput } from '@/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Dialog, IconButton, Typography } from '@mui/material';
-import { FC } from 'react';
+import { FC, useLayoutEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ButtonWithIcon from '../Common/ButtonWithIcon';
 import SvgSpriteIcon from '../Common/SvgSpriteIcon';
+import Loader from '../Loader/Loader';
 import InputForm from './InputForm';
 import { validateSchema } from './Validation';
 
@@ -32,14 +34,17 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
     },
     resolver: yupResolver(validateSchema),
   });
-  // const sendMessage = useFetch(sendFeedbackForm, true);
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    const response = await sendFeedbackForm(data);
-    console.log(response);
-    // handleClickButton();
-    //   handleClose();
-    //   reset();
+  const { isFulfilled, isLoading, eventLoading } = useFetch(sendFeedbackForm, true);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    eventLoading(data);
   };
+  useLayoutEffect(() => {
+    if (isFulfilled) {
+      handleClickButton();
+      handleClose();
+      reset();
+    }
+  }, [isFulfilled]);
 
   return (
     <Dialog
@@ -96,70 +101,74 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
           Ми будемо раді отримати від Вас повідомлення!
         </Typography>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: { xs: '48px', md: '36px' },
-              paddingX: { xs: '16px', md: '70px', lg: '64px' },
-              paddingTop: { xs: '32px', md: '16px', lg: '24px' },
-            }}>
-            <InputForm
-              control={control}
-              error={errors.firstName}
-              placeholder={'Олена'}
-              name={'firstName'}
-              label={'Імʼя*'}
-              alert={'Від 2 до 30 символів: букви, дефіс, крапка, апостроф, пробіл'}
-            />
+        {isLoading ? (
+          <Loader visible={isLoading} />
+        ) : (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: { xs: '48px', md: '36px' },
+                paddingX: { xs: '16px', md: '70px', lg: '64px' },
+                paddingTop: { xs: '32px', md: '16px', lg: '24px' },
+              }}>
+              <InputForm
+                control={control}
+                error={errors.firstName}
+                placeholder={'Олена'}
+                name={'firstName'}
+                label={'Імʼя*'}
+                alert={'Від 2 до 30 символів: букви, дефіс, крапка, апостроф, пробіл'}
+              />
 
-            <InputForm
-              control={control}
-              error={errors?.lastName}
-              placeholder={'Петрова'}
-              label={'Прізвище*'}
-              name={'lastName'}
-              alert={'Від 2 до 30 символів: букви, дефіс, крапка, апостроф, пробіл'}
-            />
-            <InputForm
-              control={control}
-              error={errors.email}
-              placeholder={'olenapetrova@gmail.com'}
-              label={'Електронна адреса*'}
-              name={'email'}
-              alert={'Формат зразок@зразок.зразок'}
-            />
+              <InputForm
+                control={control}
+                error={errors?.lastName}
+                placeholder={'Петрова'}
+                label={'Прізвище*'}
+                name={'lastName'}
+                alert={'Від 2 до 30 символів: букви, дефіс, крапка, апостроф, пробіл'}
+              />
+              <InputForm
+                control={control}
+                error={errors.email}
+                placeholder={'olenapetrova@gmail.com'}
+                label={'Електронна адреса*'}
+                name={'email'}
+                alert={'Формат зразок@зразок.зразок'}
+              />
 
-            <InputForm
-              control={control}
-              error={errors.message}
-              isMulti={true}
-              rows={7.51}
-              placeholder={'Введіть Ваше повідомлення'}
-              label={'Текст повідомлення*'}
-              name={'message'}
-              alert={'Від 10 до 300 символів'}
-            />
-          </Box>
-          <Box
-            sx={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: '52px',
-              marginBottom: { xs: '48px', md: '24px' },
-            }}>
-            <ButtonWithIcon
-              sx={{ width: { xs: '228px', md: '220px', lg: '328px' } }}
-              title="Відправити"
-              type="submit"
-              disabled={!isValid}
-              svgSpriteId="send_icon"
-            />
-          </Box>
-        </form>
+              <InputForm
+                control={control}
+                error={errors.message}
+                isMulti={true}
+                rows={7.51}
+                placeholder={'Введіть Ваше повідомлення'}
+                label={'Текст повідомлення*'}
+                name={'message'}
+                alert={'Від 10 до 300 символів'}
+              />
+            </Box>
+            <Box
+              sx={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: '52px',
+                marginBottom: { xs: '48px', md: '24px' },
+              }}>
+              <ButtonWithIcon
+                sx={{ width: { xs: '228px', md: '220px', lg: '328px' } }}
+                title="Відправити"
+                type="submit"
+                disabled={!isValid}
+                svgSpriteId="send_icon"
+              />
+            </Box>
+          </form>
+        )}
       </Box>
     </Dialog>
   );

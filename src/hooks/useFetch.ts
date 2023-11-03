@@ -1,21 +1,29 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 
-interface LoadingDataResult<T> {
+interface LoadingDataResult<T, M> {
   data: T | null;
   isLoading: boolean;
   error: AxiosError | null;
   isFulfilled: boolean;
-  eventLoading: (data: any) => void;
+  eventLoading: (data?: M) => void;
 }
+// T - дженерік типу який повертає проміс
+// M - дженерік типу аргументів (працює тільки з eventLoading  )
 
-export const useFetch = <T>(dataFetcher: (data: any) => Promise<{ data: T }>, event?: boolean): LoadingDataResult<T> => {
+// Якщо потрібно передати аргументи dataFetcher використовуємо useCallback:
+
+// const paramRequest = useCallback(()=> getMuseumData(1),[залежність для зміни параметрів])
+
+// const { data, isLoading } = useFetch<IMuseumData, unknown>(paramRequest);
+
+export const useFetch = <T, M>(dataFetcher: (data: any) => Promise<AxiosResponse<T, any>>, event?: boolean): LoadingDataResult<T, M> => {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<AxiosError | null>(null);
   const [isFulfilled, setIsFulfilled] = useState<boolean>(false);
 
-  const fetchData = async (requestData: any) => {
+  const fetchData = async (requestData?: M) => {
     setIsLoading(true);
     try {
       const response = await dataFetcher(requestData);
@@ -30,11 +38,11 @@ export const useFetch = <T>(dataFetcher: (data: any) => Promise<{ data: T }>, ev
 
   useEffect(() => {
     if (!event) {
-      fetchData(null);
+      fetchData();
     }
   }, [dataFetcher, event]);
 
-  const eventLoading = (data: any) => {
+  const eventLoading = (data?: M) => {
     fetchData(data);
   };
 

@@ -1,5 +1,6 @@
 import { getMuseumData } from '@/api';
 import { useFetch } from '@/hooks/useFetch.ts';
+import { IMuseumData } from '@/types.js';
 import { Container, Typography } from '@mui/material';
 import { FC, useState } from 'react';
 import Section from '../Common/Section.tsx';
@@ -24,7 +25,7 @@ const Contacts: FC = () => {
     setOpenDialog(false);
   };
 
-  const { data, isLoading } = useFetch(getMuseumData);
+  const { data, isLoading } = useFetch<IMuseumData, unknown>(getMuseumData);
 
   return (
     <>

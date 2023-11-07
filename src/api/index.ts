@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IFormInput } from '../types';
 
-const BASE_URL = import.meta.env.DEV ? '/api' : import.meta.env.VITE_SERVER_URL;
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
 const instance = axios.create({
   baseURL: BASE_URL,

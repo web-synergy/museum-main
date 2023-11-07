@@ -13,7 +13,6 @@ import { WrapperImg } from './styles';
 const imageUrl = `${import.meta.env.VITE_IMAGE_SERVER_URL}`;
 
 interface Event {
-  id: string;
   title: string;
   begin: string;
   end: string;

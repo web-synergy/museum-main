@@ -1,27 +1,44 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Container, styled, Box, Typography } from '@mui/material';
+import { Container, Box, Typography } from '@mui/material';
 import ButtonWithIcon from '../../Common/ButtonWithIcon';
-import { dataInfo } from './fakeData';
 import Slider from './Slider';
+import { getEvents } from '@/api';
+import { EventsPreviewSection, EmptyEventsSection } from './styles';
 
-const EventsPreviewSection = styled('section')(({ theme }) => ({
-  position: 'relative',
-  paddingTop: '60px',
-  paddingBottom: '60px',
-
-  [theme.breakpoints.up('md')]: {
-    paddingTop: '80px',
-    paddingBottom: '80px',
-  },
-
-  [theme.breakpoints.up('lg')]: {
-    paddingTop: '120px',
-    paddingBottom: '120px',
-  },
-}));
+interface Event {
+  title: string;
+  begin: string;
+  end: string;
+  description: string;
+  banner: string;
+  slug: string;
+}
 
 const EventsPreview: FC = () => {
+  const [eventsData, setEventsData] = useState<Event[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getEvents(6, 0);
+        const { content } = response.data;
+        setEventsData(content);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (eventsData.length === 0 || loading) {
+    return <EmptyEventsSection />;
+  }
+
   return (
     <EventsPreviewSection>
       <Container>
@@ -45,7 +62,7 @@ const EventsPreview: FC = () => {
             title="Дивитись усі події"
           />
         </Box>
-        <Slider fakeData={dataInfo} />
+        <Slider sliderInfo={eventsData} />
       </Container>
     </EventsPreviewSection>
   );

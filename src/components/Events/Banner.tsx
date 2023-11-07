@@ -5,6 +5,8 @@ import { truncateDescription } from '../../helpers/truncateString';
 import { theme } from '../../theme';
 import { BannerWrapper, ButtonBox, ContentBox, TextBox } from './styles';
 
+const imageUrl = `${import.meta.env.VITE_IMAGE_SERVER_URL}`;
+
 interface MuseumEventProps {
   title: string;
   summary: string;
@@ -17,7 +19,7 @@ const Banner: FC<{ event: MuseumEventProps }> = ({ event }) => {
   const buttonText = isSmallScreen ? 'Детальніше' : 'Детальніше про подію';
 
   return (
-    <BannerWrapper img={`http://130.61.247.149/api/images?filename=${event.banner}&type=ORIGINAL`}>
+    <BannerWrapper img={`${imageUrl}?filename=${event.banner}&type=ORIGINAL`}>
       <ContentBox>
         <TextBox>
           <Typography

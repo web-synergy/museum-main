@@ -26,6 +26,7 @@ const Contacts: FC = () => {
   };
 
   const { data, isLoading } = useFetch<IMuseumData, unknown>(getMuseumData);
+  console.log(data);
 
   return (
     <>

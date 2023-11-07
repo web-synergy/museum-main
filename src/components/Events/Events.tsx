@@ -10,13 +10,15 @@ import Loader from '../Loader/Loader';
 import Banner from './Banner';
 import { WrapperImg } from './styles';
 
+const imageUrl = `${import.meta.env.VITE_IMAGE_SERVER_URL}`;
+
 interface Event {
-  id: string;
   title: string;
   begin: string;
   end: string;
   summary: string;
   banner: string;
+  slug: string;
 }
 
 const Events: FC = () => {
@@ -56,8 +58,9 @@ const Events: FC = () => {
   return (
     <Section variant="light">
       {loading && <Loader visible={loading} />}
+      {cardsEvent.length === 0 && !loading && <div>На даний момент немає актуальних подій</div>}
 
-      {!loading && (
+      {cardsEvent.length > 0 && !loading && (
         <>
           <Banner event={bannerEvent} />
           <Box
@@ -69,7 +72,7 @@ const Events: FC = () => {
               paddingBottom: { xs: '40px', md: '32px' },
             }}>
             {visibleEvents.slice(0, cardsEvent.length).map((event, index) => (
-              <Container key={event.id} sx={{ borderBottom: `1px solid ${theme.palette.gray.main} ` }}>
+              <Container key={event.slug} sx={{ borderBottom: `1px solid ${theme.palette.gray.main} ` }}>
                 <Box sx={{ padding: { xs: '24px 0' } }}>
                   <Box
                     sx={{
@@ -78,7 +81,7 @@ const Events: FC = () => {
                       gap: { xs: '16px', md: '24px', lg: '48px' },
                     }}>
                     <WrapperImg>
-                      <img src={`http://130.61.247.149/api/images?filename=${event.banner}&type=ORIGINAL`} alt="" />
+                      <img src={`${imageUrl}?filename=${event.banner}&type=ORIGINAL`} alt="event logo" />
                     </WrapperImg>
                     <Box>
                       <Box
@@ -108,7 +111,7 @@ const Events: FC = () => {
             ))}
           </Box>
           <Box sx={{ width: '100%', textAlign: 'center', marginBottom: { xs: '60px', md: '80px' } }}>
-            {currentPage * pageSize < totalEvents && (
+            {totalEvents > 4 && currentPage * pageSize < totalEvents && (
               <Button sx={{ width: '248px' }} onClick={handlerLoadMore} variant="secondary">
                 Показати більше
               </Button>

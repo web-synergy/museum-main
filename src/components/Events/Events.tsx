@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography, useTheme } from '@mui/material';
+import { Box, Button, Container, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { getEvents } from '@/api';
@@ -28,6 +28,7 @@ const Events: FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [pageSize, setPageSize] = useState(4);
   const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +59,7 @@ const Events: FC = () => {
   return (
     <Section variant="light">
       {loading && <Loader visible={loading} />}
-      {cardsEvent.length === 0 && !loading && <div>На даний момент немає актуальних подій</div>}
+      {cardsEvent.length === 0 && !loading && <div>"Слідкуйте за подіями! В найближчий час тут буде багато цікавого!"</div>}
 
       {cardsEvent.length > 0 && !loading && (
         <>
@@ -81,7 +82,7 @@ const Events: FC = () => {
                       gap: { xs: '16px', md: '24px', lg: '48px' },
                     }}>
                     <WrapperImg>
-                      <img src={`${imageUrl}?filename=${event.banner}&type=ORIGINAL`} alt="event logo" />
+                      <img src={`${imageUrl}?filename=${event.banner}&type=${isSmallScreen ? 'PREVIEW' : 'ORIGINAL'}`} alt="event logo" />
                     </WrapperImg>
                     <Box>
                       <Box

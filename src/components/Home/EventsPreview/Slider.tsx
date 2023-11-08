@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -33,6 +33,8 @@ import { Keyboard, Navigation, Pagination } from 'swiper/modules';
 import { formatDate } from '@/helpers/formatDate';
 
 const Slider: FC<IFullData> = ({ sliderInfo }) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <Swiper
       navigation={true}
@@ -68,7 +70,7 @@ const Slider: FC<IFullData> = ({ sliderInfo }) => {
               </Box>
             </Box>
             <WrapperImg sx={{}}>
-              <img src={`${imageUrl}?filename=${event.banner}&type=ORIGINAL`} alt="event logo" />
+              <img src={`${imageUrl}?filename=${event.banner}&type=${isSmallScreen ? 'PREVIEW' : 'ORIGINAL'}`} alt="event logo" />
             </WrapperImg>
           </Box>
         </SwiperSlide>

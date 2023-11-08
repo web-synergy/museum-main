@@ -1,8 +1,7 @@
-import { Button, Typography, useMediaQuery } from '@mui/material';
+import { Button, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { truncateDescription } from '../../helpers/truncateString';
-import { theme } from '../../theme';
 import { BannerWrapper, ButtonBox, ContentBox, TextBox } from './styles';
 
 const imageUrl = `${import.meta.env.VITE_IMAGE_SERVER_URL}`;
@@ -14,12 +13,13 @@ interface MuseumEventProps {
 }
 
 const Banner: FC<{ event: MuseumEventProps }> = ({ event }) => {
+  const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const buttonText = isSmallScreen ? 'Детальніше' : 'Детальніше про подію';
 
   return (
-    <BannerWrapper img={`${imageUrl}?filename=${event.banner}&type=ORIGINAL`}>
+    <BannerWrapper img={`${imageUrl}?filename=${event.banner}&type=${isSmallScreen ? 'PREVIEW' : 'ORIGINAL'}`}>
       <ContentBox>
         <TextBox>
           <Typography

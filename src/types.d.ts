@@ -24,16 +24,24 @@ export interface IPage {
   content: ContentType[];
 }
 
-interface IEvent {
+export interface IEvent {
   id: string;
   title: string;
   banner: string;
   description: string;
-  begin: Date;
-  end: Date;
+  begin: string;
+  end: string;
+  slug: string;
+  summary: string;
   created: Date; //дата створення події
   content: ContentType[];
 }
+
+export interface IMuseumEventData {
+  totalElements: number;
+  content: IEvent[];
+}
+
 export interface IMuseumData {
   id: string;
   phoneNumber: string;
@@ -41,7 +49,9 @@ export interface IMuseumData {
   subwayRoute: string;
   busRoute: string;
   funicularRoute: string;
+  totalElements: number;
 }
+
 export interface IFormInput {
   firstName: string;
   lastName: string;

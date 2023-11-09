@@ -1,41 +1,28 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Container, Box, Typography } from '@mui/material';
+import { useFetch } from '@/hooks/useFetch';
 import ButtonWithIcon from '../../Common/ButtonWithIcon';
 import Slider from './Slider';
 import { getEvents } from '@/api';
 import { EventsPreviewSection, EmptyEventsSection } from './styles';
-
-interface Event {
-  title: string;
-  begin: string;
-  end: string;
-  description: string;
-  banner: string;
-  slug: string;
-}
+import { IEvent, IMuseumEventData } from '@/types';
 
 const EventsPreview: FC = () => {
-  const [eventsData, setEventsData] = useState<Event[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [eventsData, setEventsData] = useState<IEvent[]>([]);
+
+  const paramRequest = useCallback(() => getEvents(6, 0), []);
+
+  const { data, isLoading, isFulfilled } = useFetch<IMuseumEventData, unknown>(paramRequest);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getEvents(6, 0);
-        const { content } = response.data;
-        setEventsData(content);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(true);
-      }
-    };
+    if (isFulfilled) {
+      const content = data?.content || [];
+      setEventsData(content);
+    }
+  }, [data, isFulfilled]);
 
-    fetchData();
-  }, []);
-
-  if (eventsData.length === 0 || loading) {
+  if (eventsData.length === 0 || isLoading) {
     return <EmptyEventsSection />;
   }
 

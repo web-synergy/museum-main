@@ -19,15 +19,18 @@ const Events: FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [totalEvents, setTotalEvents] = useState<number>(0);
   const [pageSize, setPageSize] = useState(4);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const paramRequest = useCallback(() => getEvents(4, currentPage), [currentPage]);
 
-  const { data, isLoading, isFulfilled } = useFetch<IMuseumEventData, unknown>(paramRequest);
+  const { data, isFulfilled } = useFetch<IMuseumEventData, unknown>(paramRequest);
 
   useEffect(() => {
     if (isFulfilled) {
+      setIsLoading(false);
       const totalEvents = data?.totalElements || 0;
       const content = data?.content || [];
 
@@ -37,8 +40,10 @@ const Events: FC = () => {
   }, [data, isFulfilled]);
 
   const handlerLoadMore = () => {
+    setIsButtonLoading(true);
     setCurrentPage((prevPage) => prevPage + 1);
     setPageSize((prevPage) => prevPage + 3);
+    setIsButtonLoading(false);
   };
 
   const bannerEvent = cardsEvent[0];
@@ -100,7 +105,7 @@ const Events: FC = () => {
             ))}
           </Box>
           <Box sx={{ width: '100%', textAlign: 'center', marginBottom: { xs: '60px', md: '80px' } }}>
-            {totalEvents > 4 && currentPage * pageSize < totalEvents && (
+            {currentPage * pageSize < totalEvents && !isButtonLoading && (
               <Button sx={{ width: '248px' }} onClick={handlerLoadMore} variant="secondary">
                 Показати більше
               </Button>

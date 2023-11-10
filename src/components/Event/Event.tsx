@@ -1,39 +1,43 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback } from 'react';
 
 import { Container, useMediaQuery, useTheme } from '@mui/material';
 
 import Section from '../Common/Section';
-import { eventData as data } from './eventData';
+// import { eventData as data } from './eventData';
 import BackToEventsBtn from './parts/BackToEventsBtn';
 import EventDetails from './parts/EventDetails';
 import EventTitle from './parts/EventTitle';
 import { ContentBox } from './styledComponents';
-import { useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IEvent } from '@/types';
+import { getEventById } from '@/api';
+import { useFetch } from '@/hooks/useFetch';
+import Loader from '../Loader/Loader';
 const Event: FC = () => {
+  const navigate = useNavigate();
   const { breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down('md'));
-  const [currentEvent, setCurrentEvent] = useState<IEvent>();
-  // const par = useParams();
-  const { state } = useLocation();
-  useEffect(() => {
-    if (state) {
-      setCurrentEvent(state);
-    }
-  });
-  console.log(state);
+  const { title } = useParams();
+
+  const paramRequest = useCallback(() => getEventById(title || ''), [title]);
+
+  const { data, isLoading, error } = useFetch<IEvent, unknown>(paramRequest);
+
+  if (error) {
+    navigate('404');
+  }
+
   return (
     <Section variant="light">
       <Container>
-        <ContentBox>
-          {currentEvent && (
-            <>
-              <EventTitle {...currentEvent} />
-              <EventDetails banner={currentEvent.banner} content={currentEvent.description.split('/n')} />
-            </>
-          )}
-          <BackToEventsBtn title={isMobile ? 'До всіх подій' : 'Повернутися до всіх подій'} />
-        </ContentBox>
+        {isLoading && <Loader visible={isLoading} />}
+        {data && (
+          <ContentBox>
+            <EventTitle {...data} />
+            <EventDetails banner={data.banner} content={data.description.split('\n\n')} />
+            <BackToEventsBtn title={isMobile ? 'До всіх подій' : 'Повернутися до всіх подій'} />
+          </ContentBox>
+        )}
       </Container>
     </Section>
   );

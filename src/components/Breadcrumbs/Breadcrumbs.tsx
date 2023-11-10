@@ -1,6 +1,6 @@
 import { Box, Breadcrumbs, Container, Typography, styled, useMediaQuery, useTheme } from '@mui/material';
 import Link, { LinkProps } from '@mui/material/Link';
-import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { routing } from '@/assets/siteData';
 
 import SvgSpriteIcon from '../Common/SvgSpriteIcon';
@@ -40,14 +40,16 @@ function LinkRouter(props: LinkRouterProps) {
 
 function Page() {
   const location = useLocation();
+  const breadcrumbTitle = location.state?.title;
+
   const pathnames = location.pathname.split('/').filter((x) => x);
+
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const isEventPage = pathnames[0] === 'events';
 
   const maxItemsBreadcrumbs = isSmallScreen ? 2 : 10;
   // for breadcrumbs title on single event page
-  const { title } = useParams();
 
   return (
     <BreadcrumbsBox>
@@ -76,7 +78,7 @@ function Page() {
             } else {
               return last ? (
                 <Typography variant="breadcrumbs" sx={{ color: (theme) => theme.palette.common.black }} key={to}>
-                  {breadcrumbNameMap[to] || title}
+                  {breadcrumbNameMap[to] || breadcrumbTitle}
                 </Typography>
               ) : (
                 <LinkRouter underline="hover" color="inherit" to={to} key={to}>

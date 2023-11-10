@@ -67,11 +67,9 @@ const EventDetails: FC<EventDetailsProps> = ({ banner, content }) => {
       </ImageBox>
 
       {content.map((text, i) => (
-        <EventText key={i}>
-          <Grow in={true} timeout={1200}>
-            <Box>{text}</Box>
-          </Grow>
-        </EventText>
+        <Grow key={i} in={true} timeout={1200}>
+          <EventText>{text}</EventText>
+        </Grow>
       ))}
     </Stack>
   );

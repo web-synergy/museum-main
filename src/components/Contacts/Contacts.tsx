@@ -2,15 +2,18 @@ import { getMuseumData } from '@/api';
 import { useFetch } from '@/hooks/useFetch.ts';
 import { IMuseumData } from '@/types.js';
 import { Container, Typography } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Section from '../Common/Section.tsx';
 import FeedBackForm from '../Form/FeedBackForm.tsx';
 import ModalDialog from '../Form/ModalDialog.tsx';
 import Loader from '../Loader/Loader.tsx';
 import { BoxContact, ContactButton, ContactItem, ContactLink, ContactList, ContactPaper, Paragraph, Title } from './styles';
+import { useNavigate } from 'react-router-dom';
 const Contacts: FC = () => {
   const [open, setOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,8 +28,12 @@ const Contacts: FC = () => {
     setOpenDialog(false);
   };
 
-  const { data, isLoading } = useFetch<IMuseumData, unknown>(getMuseumData);
-  console.log(data);
+  const { data, isLoading, error } = useFetch<IMuseumData, unknown>(getMuseumData);
+  useEffect(() => {
+    if (error) {
+      navigate('404');
+    }
+  }, [error]);
 
   return (
     <>

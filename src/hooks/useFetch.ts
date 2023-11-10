@@ -17,7 +17,10 @@ interface LoadingDataResult<T, M> {
 
 // const { data, isLoading } = useFetch<IMuseumData, unknown>(paramRequest);
 
-export const useFetch = <T, M>(dataFetcher: (data: any) => Promise<AxiosResponse<T, any>>, event?: boolean): LoadingDataResult<T, M> => {
+export const useFetch = <T, M>(
+  dataFetcher: (data: any) => Promise<AxiosResponse<T, unknown>>,
+  event?: boolean
+): LoadingDataResult<T, M> => {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<AxiosError | null>(null);
@@ -30,7 +33,7 @@ export const useFetch = <T, M>(dataFetcher: (data: any) => Promise<AxiosResponse
       setData(response.data);
       setIsFulfilled(true);
       setIsLoading(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       setError(error as AxiosError);
       setIsLoading(false);
     }

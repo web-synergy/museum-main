@@ -48,7 +48,7 @@ const Events: FC = () => {
 
   const bannerEvent = cardsEvent[0];
   const visibleEvents = cardsEvent.slice(1, pageSize);
-
+  console.log(data);
   return (
     <Section variant="light">
       {isLoading && <Loader visible={isLoading} />}

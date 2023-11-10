@@ -10,6 +10,7 @@ interface MuseumEventProps {
   title: string;
   summary: string;
   banner: string;
+  slug: string;
 }
 
 const Banner: FC<{ event: MuseumEventProps }> = ({ event }) => {
@@ -41,7 +42,7 @@ const Banner: FC<{ event: MuseumEventProps }> = ({ event }) => {
           <ButtonBox>
             <Button
               component={RouterLink}
-              to={event.title}
+              to={event.slug}
               sx={{
                 minWidth: { xs: '143px' },
                 borderColor: theme.palette.text.primary,

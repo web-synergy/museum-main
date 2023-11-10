@@ -1,9 +1,8 @@
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import { Container, useMediaQuery, useTheme } from '@mui/material';
 
 import Section from '../Common/Section';
-// import { eventData as data } from './eventData';
 import BackToEventsBtn from './parts/BackToEventsBtn';
 import EventDetails from './parts/EventDetails';
 import EventTitle from './parts/EventTitle';
@@ -19,10 +18,19 @@ const Event: FC = () => {
   const { breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down('md'));
   const { title } = useParams();
+  const [breadcrumbTitle, setBreadcrumbTitle] = useState<string>('');
 
   const paramRequest = useCallback(() => getEventById(title || ''), [title]);
 
-  const { data, isLoading, error } = useFetch<IEvent, unknown>(paramRequest);
+  const { data, isLoading, isFulfilled, error } = useFetch<IEvent, unknown>(paramRequest);
+
+  useEffect(() => {
+    if (isFulfilled && data) {
+      setBreadcrumbTitle(data.title);
+      navigate(`/events/${data.slug}`, { state: { title: breadcrumbTitle } });
+    }
+  }, [isFulfilled, data, navigate, breadcrumbTitle]);
+
   useEffect(() => {
     if (error) {
       navigate('404');

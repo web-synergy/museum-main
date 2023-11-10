@@ -95,7 +95,7 @@ const Events: FC = () => {
                           variant="tertiary"
                           component={RouterLink}
                           sx={{ marginTop: '24px' }}
-                          to={cardsEvent[index + 1].slug}
+                          to={cardsEvent[index].title}
                           svgSpriteId="breadcrumbsSeparator_icon"
                           title="Читати далі"
                         />

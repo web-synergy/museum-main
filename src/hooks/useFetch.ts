@@ -18,7 +18,7 @@ interface LoadingDataResult<T, M> {
 // const { data, isLoading } = useFetch<IMuseumData, unknown>(paramRequest);
 
 export const useFetch = <T, M>(
-  dataFetcher: (data: unknown) => Promise<AxiosResponse<T, unknown>>,
+  dataFetcher: (data: any) => Promise<AxiosResponse<T, unknown>>,
   event?: boolean
 ): LoadingDataResult<T, M> => {
   const [data, setData] = useState<T | null>(null);

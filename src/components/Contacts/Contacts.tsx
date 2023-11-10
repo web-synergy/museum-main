@@ -8,9 +8,12 @@ import FeedBackForm from '../Form/FeedBackForm.tsx';
 import ModalDialog from '../Form/ModalDialog.tsx';
 import Loader from '../Loader/Loader.tsx';
 import { BoxContact, ContactButton, ContactItem, ContactLink, ContactList, ContactPaper, Paragraph, Title } from './styles';
+import { useNavigate } from 'react-router-dom';
 const Contacts: FC = () => {
   const [open, setOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,8 +28,11 @@ const Contacts: FC = () => {
     setOpenDialog(false);
   };
 
-  const { data, isLoading } = useFetch<IMuseumData, unknown>(getMuseumData);
-  console.log(data);
+  const { data, isLoading, error } = useFetch<IMuseumData, unknown>(getMuseumData);
+
+  if (error) {
+    navigate('404');
+  }
 
   return (
     <>

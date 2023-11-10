@@ -1,4 +1,5 @@
-import { Box, BoxProps, Stack, Typography, TypographyProps, styled } from '@mui/material';
+import { theme } from '@/theme';
+import { Box, BoxProps, Grow, Stack, Typography, TypographyProps, styled, useMediaQuery } from '@mui/material';
 import { FC } from 'react';
 
 interface EventDetailsProps {
@@ -8,6 +9,7 @@ interface EventDetailsProps {
 const imageUrl = `${import.meta.env.VITE_IMAGE_SERVER_URL}`;
 
 const EventDetails: FC<EventDetailsProps> = ({ banner, content }) => {
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const ImageBox = styled(Box)<BoxProps>(({ theme }) => ({
     borderRadius: '4px',
     overflow: 'hidden',
@@ -42,7 +44,6 @@ const EventDetails: FC<EventDetailsProps> = ({ banner, content }) => {
       lineHeight: 1.42,
     },
   }));
-
   return (
     <Stack
       sx={{
@@ -53,21 +54,24 @@ const EventDetails: FC<EventDetailsProps> = ({ banner, content }) => {
         },
       }}>
       <ImageBox>
-        <Box
-          component={'img'}
-          src={`${imageUrl}?filename=${banner}&type=${'ORIGINAL'}`}
-          sx={{
-            width: '100%',
-            translate: {
-              lg: '0 -52%',
-              md: '0 -42%',
-            },
-            minHeight: '352px',
-          }}
-        />
+        <Grow in={true} timeout={1000}>
+          <Box
+            component={'img'}
+            src={`${imageUrl}?filename=${banner}&type=${isSmallScreen ? 'PREVIEW' : 'ORIGINAL'}`}
+            sx={{
+              width: '100%',
+              minHeight: '352px',
+            }}
+          />
+        </Grow>
       </ImageBox>
+
       {content.map((text, i) => (
-        <EventText key={i}>{text}</EventText>
+        <EventText key={i}>
+          <Grow in={true} timeout={1200}>
+            <Box>{text}</Box>
+          </Grow>
+        </EventText>
       ))}
     </Stack>
   );

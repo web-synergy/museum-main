@@ -13,6 +13,7 @@ import { IEvent } from '@/types';
 import { getEventById } from '@/api';
 import { useFetch } from '@/hooks/useFetch';
 import Loader from '../Loader/Loader';
+
 const Event: FC = () => {
   const navigate = useNavigate();
   const { breakpoints } = useTheme();

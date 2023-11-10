@@ -48,7 +48,6 @@ const Events: FC = () => {
 
   const bannerEvent = cardsEvent[0];
   const visibleEvents = cardsEvent.slice(1, pageSize);
-  console.log(data);
   return (
     <Section variant="light">
       {isLoading && <Loader visible={isLoading} />}
@@ -65,7 +64,7 @@ const Events: FC = () => {
               marginTop: { xs: '32px', md: '44px' },
               paddingBottom: { xs: '40px', md: '32px' },
             }}>
-            {visibleEvents.slice(0, cardsEvent.length).map((event, index) => (
+            {visibleEvents.slice(0, cardsEvent.length).map((event) => (
               <Grow key={event.slug} in={true} timeout={1200}>
                 <Container sx={{ borderBottom: `1px solid ${theme.palette.gray.main} ` }}>
                   <Box sx={{ padding: { xs: '24px 0' } }}>
@@ -95,7 +94,7 @@ const Events: FC = () => {
                           variant="tertiary"
                           component={RouterLink}
                           sx={{ marginTop: '24px' }}
-                          to={cardsEvent[index].title}
+                          to={event.slug}
                           svgSpriteId="breadcrumbsSeparator_icon"
                           title="Читати далі"
                         />

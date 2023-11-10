@@ -2,7 +2,7 @@ import { getMuseumData } from '@/api';
 import { useFetch } from '@/hooks/useFetch.ts';
 import { IMuseumData } from '@/types.js';
 import { Container, Typography } from '@mui/material';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import Section from '../Common/Section.tsx';
 import FeedBackForm from '../Form/FeedBackForm.tsx';
 import ModalDialog from '../Form/ModalDialog.tsx';
@@ -29,11 +29,10 @@ const Contacts: FC = () => {
   };
 
   const { data, isLoading, error } = useFetch<IMuseumData, unknown>(getMuseumData);
-  useEffect(() => {
-    if (error) {
-      navigate('404');
-    }
-  }, [error]);
+
+  if (error) {
+    navigate('404');
+  }
 
   return (
     <>

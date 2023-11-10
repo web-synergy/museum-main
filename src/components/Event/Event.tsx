@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback } from 'react';
 
 import { Container, useMediaQuery, useTheme } from '@mui/material';
 
@@ -22,11 +22,10 @@ const Event: FC = () => {
   const paramRequest = useCallback(() => getEventById(title || ''), [title]);
 
   const { data, isLoading, error } = useFetch<IEvent, unknown>(paramRequest);
-  useEffect(() => {
-    if (error) {
-      navigate('404');
-    }
-  }, [error]);
+
+  if (error) {
+    navigate('404');
+  }
 
   return (
     <Section variant="light">

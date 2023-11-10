@@ -5,6 +5,7 @@ interface EventDetailsProps {
   banner: string;
   content: string[];
 }
+const imageUrl = `${import.meta.env.VITE_IMAGE_SERVER_URL}`;
 
 const EventDetails: FC<EventDetailsProps> = ({ banner, content }) => {
   const ImageBox = styled(Box)<BoxProps>(({ theme }) => ({
@@ -54,7 +55,7 @@ const EventDetails: FC<EventDetailsProps> = ({ banner, content }) => {
       <ImageBox>
         <Box
           component={'img'}
-          src={banner}
+          src={`${imageUrl}?filename=${banner}&type=${'ORIGINAL'}`}
           sx={{
             width: '100%',
             translate: {

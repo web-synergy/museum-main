@@ -34,10 +34,12 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
     },
     resolver: yupResolver(validateSchema),
   });
+
   const { isFulfilled, isLoading, eventLoading } = useFetch<unknown, IFormInput>(sendFeedbackForm, true);
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     eventLoading(data);
   };
+
   useLayoutEffect(() => {
     if (isFulfilled) {
       handleClickButton();

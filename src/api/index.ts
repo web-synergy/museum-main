@@ -8,7 +8,7 @@ const instance = axios.create({
 });
 
 export const sendFeedbackForm = (data: IFormInput) => {
-  return instance.post('/feedback/submit', data);
+  return instance.post<>('/feedback/submit', data);
 };
 
 export const getEvents = (size = 5, page = 1) => {

@@ -14,17 +14,10 @@ const EventDetails: FC<EventDetailsProps> = ({ banner, content }) => {
     borderRadius: '4px',
     overflow: 'hidden',
 
-    [theme.breakpoints.only('lg')]: {
-      height: '448px',
-    },
-    [theme.breakpoints.only('md')]: {
-      height: '352px',
-    },
     [theme.breakpoints.only('sm')]: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '352px',
     },
   }));
 
@@ -60,7 +53,7 @@ const EventDetails: FC<EventDetailsProps> = ({ banner, content }) => {
             src={`${imageUrl}?filename=${banner}&type=${isSmallScreen ? 'PREVIEW' : 'ORIGINAL'}`}
             sx={{
               width: '100%',
-              minHeight: '352px',
+              height: 'auto',
             }}
           />
         </Grow>

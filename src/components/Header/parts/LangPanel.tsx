@@ -1,5 +1,16 @@
-import { FC, useState, ChangeEvent } from 'react';
-import { FormControl, RadioGroup, FormControlLabel, FormControlLabelProps, Radio, Divider, styled } from '@mui/material';
+import { FC, useState, ChangeEvent, SyntheticEvent } from 'react';
+import {
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  FormControlLabelProps,
+  Radio,
+  Divider,
+  styled,
+  Tooltip,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
 
 enum Language {
   UA = 'UA',
@@ -39,9 +50,18 @@ const LangPanel: FC<LangPanelProps> = ({ additionalClickFn }) => {
     const value = localStorage.getItem(localStorageKey);
     return value ? (value as Language) : languages[0];
   });
+  const [langTooltip, setLangTooltip] = useState(false);
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   const onChangeLang = (event: ChangeEvent<HTMLInputElement>) => {
     const value = (event.target as HTMLInputElement).value as Language;
+    if (value === Language.EN) {
+      if (!isDesktop) {
+        setLangTooltip(true);
+      }
+      return;
+    }
     setLang(value);
     localStorage.setItem(localStorageKey, value);
 
@@ -50,25 +70,42 @@ const LangPanel: FC<LangPanelProps> = ({ additionalClickFn }) => {
     }
   };
 
+  const onOpenTooltip = (event: SyntheticEvent) => {
+    const textContent = (event.target as HTMLInputElement).textContent;
+
+    if (textContent === Language.EN) {
+      setLangTooltip(true);
+    }
+  };
+
   return (
     <FormControl sx={{ ml: { xs: 0, lg: '154.5px' } }}>
-      <RadioGroup aria-labelledby="language-panel" name="language" value={lang} onChange={onChangeLang} row>
-        <StyledFormControlLabel
-          value={languages[0]}
-          control={<Radio sx={{ display: 'none' }} />}
-          label={languages[0]}
-          checked={languages[0] === lang}
-          key={languages[0]}
-        />
-        <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
-        <StyledFormControlLabel
-          value={languages[1]}
-          control={<Radio sx={{ display: 'none' }} />}
-          label={languages[1]}
-          checked={languages[1] === lang}
-          key={languages[1]}
-        />
-      </RadioGroup>
+      <Tooltip
+        title="Developing function"
+        id="lang tooltip"
+        open={langTooltip}
+        onOpen={onOpenTooltip}
+        onClose={() => setLangTooltip(false)}>
+        <RadioGroup aria-labelledby="language-panel" name="language" value={lang} onChange={onChangeLang} row>
+          <StyledFormControlLabel
+            value={languages[0]}
+            control={<Radio sx={{ display: 'none' }} />}
+            label={languages[0]}
+            checked={languages[0] === lang}
+            key={languages[0]}
+          />
+          <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
+
+          <StyledFormControlLabel
+            value={languages[1]}
+            control={<Radio sx={{ display: 'none' }} />}
+            label={languages[1]}
+            checked={languages[1] === lang}
+            key={languages[1]}
+            aria-describedby="lang tooltip"
+          />
+        </RadioGroup>
+      </Tooltip>
     </FormControl>
   );
 };

@@ -6,7 +6,7 @@ import Section from '../Common/Section';
 import BackToEventsBtn from './parts/BackToEventsBtn';
 import EventDetails from './parts/EventDetails';
 import EventTitle from './parts/EventTitle';
-import { ContentBox } from './styledComponents';
+import { ContentBox } from './styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IEvent } from '@/types';
 import { getEventById } from '@/api';

@@ -9,9 +9,9 @@ import ButtonWithIcon from '../Common/ButtonWithIcon';
 import Section from '../Common/Section';
 import Loader from '../Loader/Loader';
 import Banner from './Banner';
+import EmptyEventsPage from './EmptyEventsPage';
 import { WrapperImg } from './styles';
 import { IEvent, IMuseumEventData } from '@/types';
-import EmptyEventsPage from './EmptyEventsPage';
 
 const imageUrl = `${import.meta.env.VITE_IMAGE_SERVER_URL}`;
 

@@ -25,7 +25,6 @@ export const BannerWrapper = styled(Box)<BannerWrapperProps>(({ theme, img }) =>
 }));
 
 export const ContentBox = styled(Box)(({ theme }) => ({
-  width: '320px',
   padding: '0 16px',
   textAlign: 'start',
 
@@ -42,6 +41,7 @@ export const ContentBox = styled(Box)(({ theme }) => ({
 export const TextBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
+  width: '100%',
   gap: '16px',
 
   [theme.breakpoints.up('md')]: {

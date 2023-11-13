@@ -3,22 +3,14 @@ import { Box, Typography, Container } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 import Section from '../../Common/Section';
-import slide1_des from '@/assets/images/main-slider/img1_desktop.jpg';
-import slide2_des from '@/assets/images/main-slider/img2_desktop.jpg';
-import slide3_des from '@/assets/images/main-slider/img3_desktop.jpg';
-import slide4_des from '@/assets/images/main-slider/img4_desktop.jpg';
-import slide5_des from '@/assets/images/main-slider/img5_desktop.jpg';
-import slide1_tab from '@/assets/images/main-slider/img1_tablet.jpg';
-import slide2_tab from '@/assets/images/main-slider/img2_tablet.jpg';
-import slide3_tab from '@/assets/images/main-slider/img3_tablet.jpg';
-import slide4_tab from '@/assets/images/main-slider/img4_tablet.jpg';
-import slide5_tab from '@/assets/images/main-slider/img5_tablet.jpg';
+import { homeData } from '@/assets/staticPagesData/home';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import './MainSlider.css';
 
 const MainSlider: FC = () => {
+  const { mainSlider } = homeData;
   return (
     <>
       <Container>
@@ -57,41 +49,15 @@ const MainSlider: FC = () => {
           }}
           modules={[EffectCoverflow, Autoplay, Pagination]}
           className="mySwiper2">
-          <SwiperSlide className="swiper_slide2">
-            <picture>
-              <source media="(min-width: 1280px)" srcSet={slide1_des} type="image/webp"></source>
-              <source media="(min-width: 768px)" srcSet={slide1_tab} type="image/webp"></source>
-              <img src={slide1_tab} alt="slide_image" loading="lazy" width="100%" height="100%" />
-            </picture>
-          </SwiperSlide>
-          <SwiperSlide className="swiper_slide2">
-            <picture>
-              <source media="(min-width: 1280px)" srcSet={slide2_des} type="image/webp"></source>
-              <source media="(min-width: 768px)" srcSet={slide2_tab} type="image/webp"></source>
-              <img src={slide2_tab} alt="slide_image" loading="lazy" width="100%" height="100%" />
-            </picture>
-          </SwiperSlide>
-          <SwiperSlide className="swiper_slide2">
-            <picture>
-              <source media="(min-width: 1280px)" srcSet={slide3_des} type="image/webp"></source>
-              <source media="(min-width: 768px)" srcSet={slide3_tab} type="image/webp"></source>
-              <img src={slide3_tab} alt="slide_image" loading="lazy" width="100%" height="100%" />
-            </picture>
-          </SwiperSlide>
-          <SwiperSlide className="swiper_slide2">
-            <picture>
-              <source media="(min-width: 1280px)" srcSet={slide4_des} type="image/webp"></source>
-              <source media="(min-width: 768px)" srcSet={slide4_tab} type="image/webp"></source>
-              <img src={slide4_tab} alt="slide_image" loading="lazy" width="100%" height="100%" />
-            </picture>
-          </SwiperSlide>
-          <SwiperSlide className="swiper_slide2">
-            <picture>
-              <source media="(min-width: 1280px)" srcSet={slide5_des} type="image/webp"></source>
-              <source media="(min-width: 768px)" srcSet={slide5_tab} type="image/webp"></source>
-              <img src={slide5_tab} alt="slide_image" loading="lazy" width="100%" height="100%" />
-            </picture>
-          </SwiperSlide>
+          {mainSlider.map((slide, index) => (
+            <SwiperSlide className="swiper_slide2" key={index}>
+              <picture>
+                <source media="(min-width: 1280px)" srcSet={slide.desktop} type="image/webp"></source>
+                <source media="(min-width: 768px)" srcSet={slide.mobile} type="image/webp"></source>
+                <img src={slide.mobile} alt="slide_image" loading="lazy" width="100%" height="100%" />
+              </picture>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </Box>
     </>

@@ -1,6 +1,6 @@
 import { styled, Box, Container } from '@mui/material';
-import heroTablet from '@/assets/images/hero/hero-tablet.jpg';
-import heroDesktop from '@/assets/images/hero/hero-desktop.jpg';
+import heroTablet from '@/assets/images/hero/hero-tablet.webp';
+import heroDesktop from '@/assets/images/hero/hero-desktop.webp';
 
 export const ContentBlock = styled(Container)({
   height: '100%',

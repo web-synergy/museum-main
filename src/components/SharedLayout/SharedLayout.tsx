@@ -1,10 +1,12 @@
 import { Stack, useMediaQuery, useScrollTrigger, useTheme } from '@mui/material';
 import { FC, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import useData from '@/hooks/useData';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
+import Loader from '../Loader/Loader';
 
 const SharedLayout: FC = () => {
   const location = useLocation();
@@ -15,12 +17,17 @@ const SharedLayout: FC = () => {
   const scrollTrigger = useScrollTrigger({ disableHysteresis: true, threshold: 100 });
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  const { isLoading } = useData();
 
   const onClickScrollTop = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }
   };
+
+  if (isLoading) {
+    return <Loader visible={isLoading} />;
+  }
 
   return (
     <Stack minHeight={'100vh'}>

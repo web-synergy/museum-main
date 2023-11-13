@@ -1,9 +1,9 @@
-import sculpture1 from '@/assets/images/kavaleridze/sculpture1.jpg';
-import sculpture2 from '@/assets/images/kavaleridze/sculpture2.jpg';
-import sculpture3 from '@/assets/images/kavaleridze/sculpture3.jpg';
-import sculpture4 from '@/assets/images/kavaleridze/sculpture4.jpg';
-import sculpture5 from '@/assets/images/kavaleridze/sculpture5.jpg';
-import sculpture6 from '@/assets/images/kavaleridze/sculpture6.jpg';
+import sculpture1 from '@/assets/images/kavaleridze/sculpture1.webp';
+import sculpture2 from '@/assets/images/kavaleridze/sculpture2.webp';
+import sculpture3 from '@/assets/images/kavaleridze/sculpture3.webp';
+import sculpture4 from '@/assets/images/kavaleridze/sculpture4.webp';
+import sculpture5 from '@/assets/images/kavaleridze/sculpture5.webp';
+import sculpture6 from '@/assets/images/kavaleridze/sculpture6.webp';
 import { IPage } from '@/types';
 
 export const sculptureData: IPage = {

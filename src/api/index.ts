@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IFormInput } from '../types';
+import { IFormInput, IMuseumData, IEvent } from '../types';
 
 const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -15,10 +15,10 @@ export const getEvents = (size = 5, page = 1) => {
   return instance.get(`/events?size=${size}&page=${page}`);
 };
 
-export const getEventById = (id: string) => {
-  return instance.get(`/events/${id}`);
+export const getEventById = (slug: string) => {
+  return instance.get<IEvent>(`/events/${slug}`);
 };
 
 export const getMuseumData = () => {
-  return instance.get(`/museum-data`);
+  return instance.get<IMuseumData>(`/museum-data`);
 };

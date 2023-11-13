@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-
 import { Link } from 'react-router-dom';
 import ButtonWithIcon from '../Common/ButtonWithIcon';
 import Logo from '@/assets/images/logo.svg';
@@ -8,7 +7,7 @@ export const MainIconBlok = () => {
   return (
     <Box>
       <Link to={'/'}>
-        <img src={Logo}></img>
+        <img src={Logo} alt="logo"></img>
       </Link>
     </Box>
   );

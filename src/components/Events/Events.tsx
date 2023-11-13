@@ -11,6 +11,7 @@ import Loader from '../Loader/Loader';
 import Banner from './Banner';
 import { WrapperImg } from './styles';
 import { IEvent, IMuseumEventData } from '@/types';
+import EmptyEventsPage from './EmptyEventsPage';
 
 const imageUrl = `${import.meta.env.VITE_IMAGE_SERVER_URL}`;
 
@@ -51,7 +52,7 @@ const Events: FC = () => {
   return (
     <Section variant="light">
       {isLoading && <Loader visible={isLoading} />}
-      {cardsEvent.length === 0 && isFulfilled && <div>"Слідкуйте за подіями! В найближчий час тут буде багато цікавого!"</div>}
+      {cardsEvent.length === 0 && isFulfilled && <EmptyEventsPage />}
 
       {!isLoading && cardsEvent.length > 0 && (
         <>

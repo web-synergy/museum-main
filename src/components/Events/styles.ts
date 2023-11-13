@@ -72,3 +72,20 @@ export const WrapperImg = styled(Box)(() => ({
     objectFit: 'cover',
   },
 }));
+
+export const Wrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyItems: 'center',
+  alignItems: 'center',
+  padding: '60px 0',
+  gap: '48px',
+  [theme.breakpoints.up('md')]: {
+    gap: '66px',
+    padding: '80px 0',
+  },
+  [theme.breakpoints.up('lg')]: {
+    gap: '68px',
+    padding: '120px 0',
+  },
+}));

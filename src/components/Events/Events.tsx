@@ -9,6 +9,7 @@ import ButtonWithIcon from '../Common/ButtonWithIcon';
 import Section from '../Common/Section';
 import Loader from '../Loader/Loader';
 import Banner from './Banner';
+import EmptyEventsPage from './EmptyEventsPage';
 import { WrapperImg } from './styles';
 import { IEvent, IMuseumEventData } from '@/types';
 
@@ -51,7 +52,7 @@ const Events: FC = () => {
   return (
     <Section variant="light">
       {isLoading && <Loader visible={isLoading} />}
-      {cardsEvent.length === 0 && isFulfilled && <div>"Слідкуйте за подіями! В найближчий час тут буде багато цікавого!"</div>}
+      {cardsEvent.length === 0 && isFulfilled && <EmptyEventsPage />}
 
       {!isLoading && cardsEvent.length > 0 && (
         <>

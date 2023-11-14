@@ -22,3 +22,5 @@ export const getEventById = (slug: string) => {
 export const getMuseumData = () => {
   return instance.get<IMuseumData>(`/museum-data`);
 };
+
+export const getSearchResults = (query: string) => instance.get(`/search/${query}`);

@@ -8,6 +8,7 @@ import SearchListItem from './parts/SearchListItem';
 import SearchResultsInput from './parts/SearchResultsInput';
 import ShowMoreBtn from './parts/ShowMoreBtn.tsx';
 
+import { getEventById, getSearchResults } from '@/api/index.ts';
 import { ContentBox, SearchResultsWrapper } from './styles.ts';
 import { testData } from './testData.ts';
 
@@ -52,6 +53,18 @@ const Search: FC = () => {
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (inputData.length > 2) {
+      const query = encodeURIComponent(inputData);
+
+      const getResults = async (query: string) => {
+        const data = await getSearchResults(query);
+        // const eventID = await data[0].id;
+        console.log(data);
+
+        // const event = await getEventById('creative_evening-108301368');
+        // console.log(event);
+      };
+      getResults(query);
+
       setSearchResults([]);
       setSearchTitleVal(inputData);
       setSearchResults(searchContent(inputData));

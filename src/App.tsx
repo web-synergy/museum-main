@@ -1,21 +1,38 @@
-import { useLayoutEffect } from 'react';
+import { lazy, useLayoutEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import Contacts from './components/Contacts/Contacts';
-import Donation from './components/Donation/Donation';
-import Event from './components/Event/Event';
-import Events from './components/Events/Events';
+// import Contacts from './components/Contacts/Contacts';
+// import Donation from './components/Donation/Donation';
+// import Event from './components/Event/Event';
+// import Events from './components/Events/Events';
 import Home from './components/Home/Home';
 import Artist from './components/Kavaleridze/Artist/Artist';
 import Biography from './components/Kavaleridze/Biography/Biography';
-import Kavaleridze from './components/Kavaleridze/Kavaleridze';
+// import Kavaleridze from './components/Kavaleridze/Kavaleridze';
 import Kyiv from './components/Kavaleridze/Kyiv/Kyiv';
 import Movie from './components/Kavaleridze/Movie/Movie';
 import Sculpture from './components/Kavaleridze/Sculpture/Sculpture';
-import MuseumHistory from './components/MuseumHistory/MuseumHistory';
-import NotFoundPage from './components/NotFoundPage/NotFoundPage';
-import Search from './components/Search/Search';
-import Tickets from './components/Tickets/Tickets';
+// import MuseumHistory from './components/MuseumHistory/MuseumHistory';
+// import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+// import Search from './components/Search/Search';
+// import Tickets from './components/Tickets/Tickets';
 import SharedLayout from './components/SharedLayout/SharedLayout';
+
+const Contacts = lazy(() => import('./components/Contacts/Contacts'));
+const Donation = lazy(() => import('./components/Donation/Donation'));
+const Event = lazy(() => import('./components/Event/Event'));
+const Events = lazy(() => import('./components/Events/Events'));
+// const Home = lazy(() => import('./components/Home/Home'));
+// const Artist = lazy(() => import('./components/Kavaleridze/Artist/Artist'));
+// const Biography = lazy(() => import('./components/Kavaleridze/Biography/Biography'));
+const Kavaleridze = lazy(() => import('./components/Kavaleridze/Kavaleridze'));
+// const Kyiv = lazy(() => import('./components/Kavaleridze/Kyiv/Kyiv'));
+// const Movie = lazy(() => import('./components/Kavaleridze/Movie/Movie'));
+// const Sculpture = lazy(() => import('./components/Kavaleridze/Sculpture/Sculpture'));
+const MuseumHistory = lazy(() => import('./components/MuseumHistory/MuseumHistory'));
+const NotFoundPage = lazy(() => import('./components/NotFoundPage/NotFoundPage'));
+const Search = lazy(() => import('./components/Search/Search'));
+const Tickets = lazy(() => import('./components/Tickets/Tickets'));
+// const SharedLayout = lazy(() => import('./components/SharedLayout/SharedLayout'));
 
 function App() {
   const location = useLocation();

@@ -1,10 +1,11 @@
 import { Stack, useMediaQuery, useScrollTrigger, useTheme } from '@mui/material';
-import { FC, useRef } from 'react';
+import { FC, Suspense, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
+import Loader from '../Loader/Loader';
 
 const SharedLayout: FC = () => {
   const location = useLocation();
@@ -31,7 +32,9 @@ const SharedLayout: FC = () => {
           minHeight: '100%',
           flex: '1 1 auto',
         }}>
-        <Outlet />
+        <Suspense fallback={<Loader visible={true} />}>
+          <Outlet />
+        </Suspense>
         {isDesktop && <ScrollToTop scrollTrigger={scrollTrigger} onClickScrollTop={onClickScrollTop} />}
       </Stack>
       <Footer />

@@ -54,7 +54,7 @@ const MainSlider: FC = () => {
               <picture>
                 <source media="(min-width: 1280px)" srcSet={slide.desktop} type="image/webp"></source>
                 <source media="(min-width: 768px)" srcSet={slide.mobile} type="image/webp"></source>
-                <img src={slide.mobile} alt="slide_image" loading="lazy" width="100%" height="100%" />
+                <img src={slide.mobile} alt={`Зображення до слайду ${index + 1}`} loading="lazy" width="100%" height="100%" />
               </picture>
             </SwiperSlide>
           ))}

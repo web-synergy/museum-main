@@ -69,8 +69,11 @@ const Slider: FC<IFullData> = ({ sliderInfo }) => {
                 </Button>
               </Box>
             </Box>
-            <WrapperImg sx={{}}>
-              <img src={`${imageUrl}?filename=${event.banner}&type=${isSmallScreen ? 'PREVIEW' : 'ORIGINAL'}`} alt="event logo" />
+            <WrapperImg>
+              <img
+                src={`${imageUrl}?filename=${event.banner}&type=${isSmallScreen ? 'PREVIEW' : 'ORIGINAL'}`}
+                alt={`Зображення до події ${event.title}`}
+              />
             </WrapperImg>
           </Box>
         </SwiperSlide>

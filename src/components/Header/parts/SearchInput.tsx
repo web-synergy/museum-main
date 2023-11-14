@@ -1,7 +1,8 @@
 import { FC, useState, ChangeEvent, FormEvent, useRef, FocusEvent, TouchEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, TextField, InputAdornment, styled, useTheme, useMediaQuery } from '@mui/material';
+import { Box, TextField, InputAdornment, styled, useTheme, useMediaQuery, InputLabel } from '@mui/material';
 import SvgSpriteIcon from '../../Common/SvgSpriteIcon';
+import { visuallyHidden } from '@/styles/visually-hidden';
 
 interface SearchInputProps {
   onCloseMenu?: () => void;
@@ -71,6 +72,9 @@ const SearchInput: FC<SearchInputProps> = ({ onCloseMenu }) => {
 
   return (
     <Box component="form" flex="1 1 auto" mr={{ xs: 0, lg: 2 }} sx={{ width: { xs: '100%', lg: 'auto' } }} onSubmit={onSubmit}>
+      <InputLabel sx={visuallyHidden} htmlFor="search">
+        Пошук
+      </InputLabel>
       <CustomTextField
         id="search"
         variant="outlined"

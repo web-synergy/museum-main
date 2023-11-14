@@ -7,6 +7,7 @@ import FeedBackForm from '../Form/FeedBackForm.tsx';
 import ModalDialog from '../Form/ModalDialog.tsx';
 import Loader from '../Loader/Loader.tsx';
 import { BoxContact, ContactButton, ContactItem, ContactLink, ContactList, ContactPaper, Paragraph, Title } from './styles';
+import { visuallyHidden } from '@/styles/visually-hidden.ts';
 
 const Contacts: FC = () => {
   const [open, setOpen] = useState(false);
@@ -38,6 +39,9 @@ const Contacts: FC = () => {
     <>
       <Section variant="light">
         <Container>
+          <Typography variant="h1" sx={visuallyHidden}>
+            Контакти музею
+          </Typography>
           {isLoading ? (
             <Loader visible={isLoading} />
           ) : (

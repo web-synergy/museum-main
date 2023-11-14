@@ -11,6 +11,7 @@ import Loader from '../Loader/Loader';
 import Banner from './Banner';
 import { WrapperImg } from './styles';
 import { IEvent, IMuseumEventData } from '@/types';
+import { visuallyHidden } from '@/styles/visually-hidden';
 
 const imageUrl = `${import.meta.env.VITE_IMAGE_SERVER_URL}`;
 
@@ -50,6 +51,9 @@ const Events: FC = () => {
   const visibleEvents = cardsEvent.slice(1, pageSize);
   return (
     <Section variant="light">
+      <Typography variant="h1" sx={visuallyHidden}>
+        Події
+      </Typography>
       {isLoading && <Loader visible={isLoading} />}
       {cardsEvent.length === 0 && isFulfilled && <div>"Слідкуйте за подіями! В найближчий час тут буде багато цікавого!"</div>}
 
@@ -75,7 +79,10 @@ const Events: FC = () => {
                         gap: { xs: '16px', md: '24px', lg: '48px' },
                       }}>
                       <WrapperImg>
-                        <img src={`${imageUrl}?filename=${event.banner}&type=${isSmallScreen ? 'PREVIEW' : 'ORIGINAL'}`} alt="event logo" />
+                        <img
+                          src={`${imageUrl}?filename=${event.banner}&type=${isSmallScreen ? 'PREVIEW' : 'ORIGINAL'}`}
+                          alt={`Зображення до події ${event.title}`}
+                        />
                       </WrapperImg>
                       <Box>
                         <Box

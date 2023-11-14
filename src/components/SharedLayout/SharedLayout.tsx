@@ -26,7 +26,11 @@ const SharedLayout: FC = () => {
   };
 
   if (isLoading) {
-    return <Loader visible={isLoading} />;
+    return (
+      <Stack sx={{ height: '100vh', width: '100vw', backgroundColor: (theme) => theme.palette.common.black }} justifyContent="center">
+        <Loader visible={isLoading} />
+      </Stack>
+    );
   }
 
   return (

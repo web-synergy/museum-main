@@ -56,6 +56,7 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
         </Backdrop>
       )}
       <Dialog
+        aria-aria-labelledby="form-title"
         PaperProps={{ style: { padding: '0px', margin: '0px' } }}
         sx={{
           '& .MuiDialog-container': {
@@ -96,6 +97,8 @@ const FeedBackForm: FC<FeedBackFormProps> = ({ handleClose, open, handleClickBut
           </IconButton>
 
           <Typography
+            id="form-title"
+            component={'h2'}
             sx={{
               m: '0 auto',
               pt: { xs: 10, lg: 9 },

@@ -15,7 +15,6 @@ export const DataContext = createContext<DataContextType>(null!);
 export const DataProvider: FC<PropsWithChildren> = ({ children }) => {
   const { data, isLoading, error } = useFetch<IMuseumData, unknown>(getMuseumData);
 
-  console.log(data);
   const value = { data, isLoading, error };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

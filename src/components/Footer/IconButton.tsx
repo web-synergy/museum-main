@@ -6,8 +6,8 @@ import Logo from '@/assets/images/logo.svg';
 export const MainIconBlok = () => {
   return (
     <Box>
-      <Link to={'/'}>
-        <img src={Logo} alt="logo"></img>
+      <Link to={'/'} aria-label="Повернутись на головну сторінку">
+        <img src={Logo} alt="Логотип Музею-Мастерні ім. Івана Кавалерідзе"></img>
       </Link>
     </Box>
   );

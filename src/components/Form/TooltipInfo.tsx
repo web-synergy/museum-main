@@ -29,6 +29,7 @@ const TooltipInfo: FC<TooltipInfoProps> = ({ alert }) => {
         leaveDelay={200}
         enterTouchDelay={1}
         placement={'top-start'}
+        aria-label="Допустимі значення до поля"
         title={
           <Typography variant="body1" sx={{ lineHeight: '16.8px', fontSize: { xs: '14px', md: '16px' } }}>
             {alert}

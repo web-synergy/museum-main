@@ -42,6 +42,7 @@ export const Title = styled(Typography)({
   display: 'block',
   marginBottom: '16px',
 });
+
 export const SubTitle = styled(Typography)({
   display: 'inline-block',
   fontWeight: 600,

@@ -1,8 +1,8 @@
 import { IPage } from '@/types';
-import imageDesktop1 from '@/assets/images/kavaleridze/kiyvDesktop1.jpg';
-import imageTablet1 from '@/assets/images/kavaleridze/kiyvTablet1.jpg';
-import image2 from '@/assets/images/kavaleridze/kiyv2.jpg';
-import image3 from '@/assets/images/kavaleridze/kiyv3.jpg';
+import imageDesktop1 from '@/assets/images/kavaleridze/kiyvDesktop1.webp';
+import imageTablet1 from '@/assets/images/kavaleridze/kiyvTablet1.webp';
+import image2 from '@/assets/images/kavaleridze/kiyv2.webp';
+import image3 from '@/assets/images/kavaleridze/kiyv3.webp';
 
 export const kyivData: IPage = {
   title: 'Митець і Київ',

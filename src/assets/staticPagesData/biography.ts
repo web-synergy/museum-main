@@ -1,8 +1,8 @@
 import { IPage } from '@/types';
-import image1 from '@/assets/images/kavaleridze/biography1.jpg';
-import image2 from '@/assets/images/kavaleridze/biography2.jpg';
-import image3 from '@/assets/images/kavaleridze/biography3.jpg';
-import image4 from '@/assets/images/kavaleridze/biography4.jpg';
+import image1 from '@/assets/images/kavaleridze/biography1.webp';
+import image2 from '@/assets/images/kavaleridze/biography2.webp';
+import image3 from '@/assets/images/kavaleridze/biography3.webp';
+import image4 from '@/assets/images/kavaleridze/biography4.webp';
 
 export const biographyDate: IPage = {
   title: 'Біографія',

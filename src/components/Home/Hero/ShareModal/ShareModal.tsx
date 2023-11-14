@@ -4,10 +4,10 @@ import { FacebookShareButton, ViberShareButton, TelegramShareButton } from 'reac
 import SvgSpriteIcon from '@/components/Common/SvgSpriteIcon';
 import { StyledBox, StyledTextButton } from './styles';
 
-import facebook from '@/assets/images/social-media/facebook.png';
-import gmail from '@/assets/images/social-media/gmail.png';
-import viber from '@/assets/images/social-media/viber.png';
-import telegram from '@/assets/images/social-media/telegram.png';
+import facebook from '@/assets/images/social-media/facebook.webp';
+import gmail from '@/assets/images/social-media/gmail.webp';
+import viber from '@/assets/images/social-media/viber.webp';
+import telegram from '@/assets/images/social-media/telegram.webp';
 
 interface ShareModalProps {
   open: boolean;

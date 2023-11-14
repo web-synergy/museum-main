@@ -1,8 +1,8 @@
 import { IPage } from '@/types';
-import imageDesktop1 from '@/assets/images/kavaleridze/movieDesktop1.jpg';
-import imageTablet1 from '@/assets/images/kavaleridze/movieTablet1.jpg';
-import imageDesktop2 from '@/assets/images/kavaleridze/movieDesktop2.jpg';
-import imageTablet2 from '@/assets/images/kavaleridze/movieTablet2.jpg';
+import imageDesktop1 from '@/assets/images/kavaleridze/movieDesktop1.webp';
+import imageTablet1 from '@/assets/images/kavaleridze/movieTablet1.webp';
+import imageDesktop2 from '@/assets/images/kavaleridze/movieDesktop2.webp';
+import imageTablet2 from '@/assets/images/kavaleridze/movieTablet2.webp';
 
 export const movieData: IPage = {
   title: 'Кіно',

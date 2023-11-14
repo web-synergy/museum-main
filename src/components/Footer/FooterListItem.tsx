@@ -1,5 +1,6 @@
 import { Box, List, ListItem, ListItemIcon, ListItemText, Stack, Typography, styled, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
+import useData from '@/hooks/useData';
 import data from '@/assets/siteData';
 import useActiveLink from '@/hooks/useActiveLink';
 import SvgSpriteIcon from '../Common/SvgSpriteIcon';
@@ -8,7 +9,7 @@ const {
   menuList: { main },
 } = data;
 
-const { phone, email, location, workingHours } = data.general;
+const { location, workingHours } = data.general;
 interface IListTextProps {
   title: string;
   svg: string;
@@ -65,14 +66,22 @@ const ListTypography = ({ title, svg }: IListTextProps) => (
     <ListItemText sx={{ m: '0px' }} primary={<Typography variant="navigationRale">{title}</Typography>}></ListItemText>
   </ListItem>
 );
-export const ListContacts = () => (
-  <MyList sx={{ gap: { xs: '24px', lg: '20.1px' } }} disablePadding>
-    <ListContactItem href={`tel:${phone}`} title={phone} svg="phone_icon" />
-    <ListContactItem href={`mailto:${email}`} title={email} svg="email_icon" />
-    <ListTypography title={location} svg="location_icon" />
-    <ListTypography title={workingHours} svg="clock_icon" />
-  </MyList>
-);
+
+export const ListContacts = () => {
+  const { data } = useData();
+
+  const phone = data ? data.phoneNumber : 'phone number';
+  const email = data ? data.email : 'email';
+
+  return (
+    <MyList sx={{ gap: { xs: '24px', lg: '20.1px' } }} disablePadding>
+      <ListContactItem href={`tel:${phone}`} title={phone} svg="phone_icon" />
+      <ListContactItem href={`mailto:${email}`} title={email} svg="email_icon" />
+      <ListTypography title={location} svg="location_icon" />
+      <ListTypography title={workingHours} svg="clock_icon" />
+    </MyList>
+  );
+};
 
 const ListContactItem = ({ title, svg = '', href = '#' }: IListLinkTextProps) => {
   return (

@@ -1,8 +1,8 @@
 import { IPage } from '@/types';
-import image1 from '@/assets/images/kavaleridze/artist1.jpg';
-import image2 from '@/assets/images/kavaleridze/artist2.jpg';
-import imageDesktop3 from '@/assets/images/kavaleridze/artistDesktop3.jpg';
-import imageTablet3 from '@/assets/images/kavaleridze/artistTablet3.jpg';
+import image1 from '@/assets/images/kavaleridze/artist1.webp';
+import image2 from '@/assets/images/kavaleridze/artist2.webp';
+import imageDesktop3 from '@/assets/images/kavaleridze/artistDesktop3.webp';
+import imageTablet3 from '@/assets/images/kavaleridze/artistTablet3.webp';
 
 export const artistData: IPage = {
   title: 'Митець',

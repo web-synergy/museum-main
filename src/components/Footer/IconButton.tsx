@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-
 import { Link } from 'react-router-dom';
 import ButtonWithIcon from '../Common/ButtonWithIcon';
 import Logo from '@/assets/images/logo.svg';
@@ -7,8 +6,8 @@ import Logo from '@/assets/images/logo.svg';
 export const MainIconBlok = () => {
   return (
     <Box>
-      <Link to={'/'}>
-        <img src={Logo}></img>
+      <Link to={'/'} aria-label="Повернутись на головну сторінку">
+        <img src={Logo} alt="Логотип Музею-Мастерні ім. Івана Кавалерідзе"></img>
       </Link>
     </Box>
   );

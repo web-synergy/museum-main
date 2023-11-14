@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { Typography, useTheme } from '@mui/material';
 import Section from '../../Common/Section';
 import { SmallGridItem, BigGridItem, FamousList, ImgArt, TopTextBlock, BottomTextBlock, ContainerFamous, PictureArt } from './styles';
-import data from '@/assets/siteData';
+import { homeData } from '@/assets/staticPagesData/home';
 
 const FamousArtist: FC = () => {
-  const { famousArtImages } = data;
+  const { famousArtImages } = homeData;
   const theme = useTheme();
   return (
     <Section variant="dark" component="section">

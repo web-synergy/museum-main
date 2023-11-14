@@ -13,7 +13,7 @@ const ScrollToTop: FC<ScrollToTopProps> = ({ scrollTrigger, onClickScrollTop }) 
     <Fade in={scrollTrigger}>
       <Box sx={{ position: 'sticky', bottom: 0 }}>
         <Box sx={{ position: 'absolute', bottom: 36, right: { xs: 8, md: 12, lg: 28 } }}>
-          <Fab onClick={onClickScrollTop}>
+          <Fab onClick={onClickScrollTop} aria-label="Наверх">
             <Stack
               width={52}
               height={52}

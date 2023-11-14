@@ -2,12 +2,14 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Typography, Stack } from '@mui/material';
 import Section from '../../Common/Section';
-import data from '@/assets/siteData';
+import { homeData } from '@/assets/staticPagesData/home';
 import { InfoWrapper, Img, Picture } from './styles';
 import ButtonWithIcon from '../../Common/ButtonWithIcon';
+import siteData from '@/assets/siteData';
 
 const AboutHistory: FC = () => {
-  const { buttonsLabels, about_history } = data;
+  const { about_history } = homeData;
+  const { buttonsLabels } = siteData;
   const { text, src } = about_history;
 
   return (

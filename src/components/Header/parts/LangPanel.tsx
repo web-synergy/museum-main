@@ -78,9 +78,13 @@ const LangPanel: FC<LangPanelProps> = ({ additionalClickFn }) => {
     }
   };
 
+  const onCloseTooltip = () => {
+    setLangTooltip(false);
+  };
+
   return (
     <FormControl sx={{ ml: { xs: 0, lg: '154.5px' } }}>
-      <Tooltip title="Функція в розробці" id="lang tooltip" open={langTooltip} onOpen={onOpenTooltip} onClose={() => setLangTooltip(false)}>
+      <Tooltip title="Функція в розробці" id="lang tooltip" open={langTooltip} onOpen={onOpenTooltip} onClose={onCloseTooltip}>
         <RadioGroup aria-label="language-panel" name="language" value={lang} onChange={onChangeLang} row>
           <StyledFormControlLabel
             value={languages[0]}
@@ -99,6 +103,8 @@ const LangPanel: FC<LangPanelProps> = ({ additionalClickFn }) => {
             checked={languages[1] === lang}
             key={languages[1]}
             aria-label={`Вибрати англійську`}
+            onMouseLeave={onCloseTooltip}
+            sx={{ cursor: 'default' }}
           />
         </RadioGroup>
       </Tooltip>

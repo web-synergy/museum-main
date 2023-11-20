@@ -1,4 +1,3 @@
-import { routing } from '@/assets/siteData';
 import { Box, Divider, Link, Stack, Typography, styled, useTheme } from '@mui/material';
 import { FC, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -18,12 +17,6 @@ const ContentBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-// interface SearchListItemProps {
-//   route: string;
-//   title: string;
-//   description?: string;
-//   key?: string | number;
-// }
 interface SearchListItemProps {
   id?: string;
   title?: string;
@@ -32,15 +25,10 @@ interface SearchListItemProps {
 }
 
 const SearchListItem: FC<SearchListItemProps> = ({ id, title, description, contentType }) => {
-  const isEventRoute = (id: string | undefined, contentType: string | undefined) => (contentType === 'EVENT' ? `/events/${id}` : id);
-
-  const theme = useTheme();
-  // const mainRoute = route.split('/').filter((x) => x)[0];
   const [isMouseOn, setIsMouseOn] = useState(false);
+  const theme = useTheme();
 
-  // const getRouteTitle = (route: string): string => {
-  //   return routing.find((el) => el.href === route)?.title || '';
-  // };
+  const isEventRoute = (id: string | undefined, contentType: string | undefined) => (contentType === 'EVENT' ? `/events/${id}` : id);
 
   const trimDescription = (desc: string, length: number): string => {
     if (desc.length > length) return desc.slice(0, length + 1) + '...';

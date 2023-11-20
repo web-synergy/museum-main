@@ -54,7 +54,7 @@ const Search: FC = () => {
     setInputValue(getStringFromQuery(searchQuery));
     if (searchQuery.length > 2) {
       fetchData(searchQuery);
-      setSearchTitle(inputValue);
+      setSearchTitle(getStringFromQuery(searchQuery));
       setVisibleNum(5);
     }
   }, [searchQuery]);

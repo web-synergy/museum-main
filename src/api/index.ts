@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IFormInput, IMuseumData, IEvent } from '../types';
+import { IEvent, IFormInput, IMuseumData } from '../types';
 
 const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -23,4 +23,13 @@ export const getMuseumData = () => {
   return instance.get<IMuseumData>(`/museum-data`);
 };
 
-export const getSearchResults = (query: string) => instance.get(`/search/${query}`);
+export const getSearchResults = async (query: string) => {
+  try{
+    const { data } = await instance.get(`/search/${query}`)
+    return data
+  }catch (e) {
+    return null
+  } 
+}
+
+  

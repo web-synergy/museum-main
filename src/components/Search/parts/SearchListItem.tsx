@@ -1,7 +1,7 @@
+import { routing } from '@/assets/siteData';
 import { Box, Divider, Link, Stack, Typography, styled, useTheme } from '@mui/material';
 import { FC, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { routing } from '@/assets/siteData';
 
 const MAX_DESC_LENGTH = 200;
 
@@ -18,21 +18,29 @@ const ContentBox = styled(Box)(({ theme }) => ({
   },
 }));
 
+// interface SearchListItemProps {
+//   route: string;
+//   title: string;
+//   description?: string;
+//   key?: string | number;
+// }
 interface SearchListItemProps {
-  route: string;
-  title: string;
+  id?: string;
+  title?: string;
   description?: string;
-  key?: string | number;
+  contentType?: string;
 }
 
-const SearchListItem: FC<SearchListItemProps> = ({ route, title, description }) => {
+const SearchListItem: FC<SearchListItemProps> = ({ id, title, description, contentType }) => {
+  const isEventRoute = (id: string | undefined, contentType: string | undefined) => (contentType === 'EVENT' ? `/events/${id}` : id);
+
   const theme = useTheme();
-  const mainRoute = route.split('/').filter((x) => x)[0];
+  // const mainRoute = route.split('/').filter((x) => x)[0];
   const [isMouseOn, setIsMouseOn] = useState(false);
 
-  const getRouteTitle = (route: string): string => {
-    return routing.find((el) => el.href === route)?.title || '';
-  };
+  // const getRouteTitle = (route: string): string => {
+  //   return routing.find((el) => el.href === route)?.title || '';
+  // };
 
   const trimDescription = (desc: string, length: number): string => {
     if (desc.length > length) return desc.slice(0, length + 1) + '...';
@@ -44,14 +52,17 @@ const SearchListItem: FC<SearchListItemProps> = ({ route, title, description }) 
       <ContentBox>
         <Typography variant="body2" component={'p'} sx={{ color: theme.palette.text.secondary }}>
           Перейти на сторінку "
-          <Link sx={{ color: 'inherit', textDecoration: 'underline', cursor: 'pointer' }} component={RouterLink} to={`/${mainRoute}`}>
-            {getRouteTitle(route)}"
+          <Link
+            sx={{ color: 'inherit', textDecoration: 'underline', cursor: 'pointer' }}
+            component={RouterLink}
+            to={`/${isEventRoute(id, contentType)}`}>
+            {title}"
           </Link>
         </Typography>
         <Stack
           spacing={2}
           component={RouterLink}
-          to={`${route}`}
+          to={`${isEventRoute(id, contentType)}`}
           onMouseEnter={() => setIsMouseOn(true)}
           onMouseLeave={() => setIsMouseOn(false)}>
           <Typography

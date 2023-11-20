@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import { ChangeEventHandler, FC, FormEventHandler, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Section from '../Common/Section.tsx';
 import SearchInfo from './parts/SearchInfo.tsx';
@@ -8,84 +8,71 @@ import SearchListItem from './parts/SearchListItem';
 import SearchResultsInput from './parts/SearchResultsInput';
 import ShowMoreBtn from './parts/ShowMoreBtn.tsx';
 
-import { getEventById, getSearchResults } from '@/api/index.ts';
+import { getSearchResults } from '@/api/index.ts';
+import { getStringFromQuery } from './heplers.ts';
 import { ContentBox, SearchResultsWrapper } from './styles.ts';
-import { testData } from './testData.ts';
+
+interface Data {
+  id: string;
+  title: string;
+  description?: string;
+  contentType?: string;
+}
 
 const Search: FC = () => {
+  const navigate = useNavigate();
+
   const [searchParams] = useSearchParams();
-  let search = searchParams.get('request') || '';
+  const searchQuery = searchParams.get('request') || '';
 
-  useEffect(() => {
-    search = searchParams.get('request') || '';
-    setInputData(search);
-    if (inputData.length > 2) {
-      setSearchResults([]);
-      setSearchResults(searchContent(search));
-      setSearchTitleVal(search);
-      setVisibleNum(5);
-    }
-  }, [searchParams]);
-
-  const [inputData, setInputData] = useState(search);
-  const [searchResults, setSearchResults] = useState(() => {
-    return searchContent(search);
-  });
-  const [searchTitleVal, setSearchTitleVal] = useState(inputData);
+  const [data, setData] = useState<Data[] | []>([]);
   const [visibleNum, setVisibleNum] = useState(5);
-
-  function searchContent(patt: string) {
-    if (patt.length) {
-      const pattern = new RegExp(patt, 'gim');
-      return testData.filter((el) => pattern.test(el.description || '') || pattern.test(el.title));
-    }
-    return [];
-  }
-
-  const handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
-    setInputData(e.target.value);
-  };
+  const [inputValue, setInputValue] = useState(getStringFromQuery(searchQuery));
+  const [searchTitle, setSearchTitle] = useState('');
 
   const changeVisibleNum = () => {
     setVisibleNum((prevVal) => prevVal + 5);
   };
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    if (inputData.length > 2) {
-      const query = encodeURIComponent(inputData);
+  const updateInputVal: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => setInputValue(e.target.value);
 
-      const getResults = async (query: string) => {
-        const data = await getSearchResults(query);
-        // const eventID = await data[0].id;
-        console.log(data);
+  const fetchData = async (inputValue: string) => {
+    const query = encodeURIComponent(inputValue);
+    const data = await getSearchResults(query);
+    if (data !== null && data.length) setData(data);
+    else setData([]);
+  };
 
-        // const event = await getEventById('creative_evening-108301368');
-        // console.log(event);
-      };
-      getResults(query);
-
-      setSearchResults([]);
-      setSearchTitleVal(inputData);
-      setSearchResults(searchContent(inputData));
-      setVisibleNum(5);
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+    if (inputValue.length > 2) {
+      navigate(`/search?request=${inputValue.split(' ').join('-')}`);
     }
   };
+
+  useEffect(() => {
+    setInputValue(getStringFromQuery(searchQuery));
+    if (searchQuery.length > 2) {
+      fetchData(searchQuery);
+      setSearchTitle(inputValue);
+      setVisibleNum(5);
+    }
+  }, [searchQuery]);
 
   return (
     <Section variant="light">
       <Container>
         <ContentBox>
-          <SearchResultsInput {...{ inputData, handleChange, onSubmit }} />
-          <SearchInfo resultsCount={searchResults.length} searchTitle={searchTitleVal} />
-          {!!searchResults?.length && (
+          <SearchResultsInput {...{ inputValue, updateInputVal, onSubmit }} />
+          <SearchInfo resultsCount={data.length} searchTitle={searchTitle} />
+          {!!data.length && (
             <>
               <SearchResultsWrapper component={'ul'}>
-                {searchResults.slice(0, visibleNum).map((data, index) => {
-                  return <SearchListItem key={index} {...data} />;
-                })}
+                {data.slice(0, visibleNum).map((data, index) => (
+                  <SearchListItem key={index} {...data} />
+                ))}
               </SearchResultsWrapper>
-              {visibleNum < searchResults.length && <ShowMoreBtn onClick={changeVisibleNum} />}
+              {visibleNum < data.length && <ShowMoreBtn onClick={changeVisibleNum} />}
             </>
           )}
         </ContentBox>

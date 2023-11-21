@@ -67,6 +67,7 @@ const InputForm: FC<InputFormProps> = ({ placeholder, control, name, alert, labe
             id={name}
             sx={{
               '& .MuiInputBase-input.MuiOutlinedInput-input': {
+                padding: '0 28px 0 0',
                 height: '19px',
 
                 '&::placeholder': {

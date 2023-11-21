@@ -6,12 +6,12 @@ import { SearchInput } from '../styles';
 const MAX_SYMBOLS_INPUT = 120;
 
 interface SearchResultsInputProps {
-  inputData: string;
-  handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  inputValue: string;
+  updateInputVal: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onSubmit?: FormEventHandler<HTMLFormElement>;
 }
 
-const SearchResultsInput: FC<SearchResultsInputProps> = ({ inputData, handleChange, onSubmit }) => {
+const SearchResultsInput: FC<SearchResultsInputProps> = ({ inputValue, updateInputVal, onSubmit }) => {
   const { palette } = useTheme();
 
   return (
@@ -20,8 +20,8 @@ const SearchResultsInput: FC<SearchResultsInputProps> = ({ inputData, handleChan
         variant="standard"
         fullWidth
         autoComplete="off"
-        value={inputData}
-        onChange={handleChange}
+        value={inputValue}
+        onChange={updateInputVal}
         inputProps={{ maxLength: MAX_SYMBOLS_INPUT }}
         InputProps={{
           startAdornment: (

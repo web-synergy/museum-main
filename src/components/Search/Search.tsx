@@ -7,7 +7,7 @@ import SearchInfo from './parts/SearchInfo.tsx';
 import SearchListItem from './parts/SearchListItem';
 import SearchResultsInput from './parts/SearchResultsInput';
 import ShowMoreBtn from './parts/ShowMoreBtn.tsx';
-
+import Loader from '../Loader/Loader.tsx';
 import { getSearchResults } from '@/api/index.ts';
 import { getStringFromQuery } from './heplers.ts';
 import { ContentBox, SearchResultsWrapper } from './styles.ts';
@@ -29,6 +29,7 @@ const Search: FC = () => {
   const [visibleNum, setVisibleNum] = useState(5);
   const [inputValue, setInputValue] = useState(getStringFromQuery(searchQuery));
   const [searchTitle, setSearchTitle] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const changeVisibleNum = () => {
     setVisibleNum((prevVal) => prevVal + 5);
@@ -41,6 +42,7 @@ const Search: FC = () => {
     const data = await getSearchResults(query);
     if (data !== null && data.length) setData(data);
     else setData([]);
+    setIsLoading(false);
   };
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -51,6 +53,7 @@ const Search: FC = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     setInputValue(getStringFromQuery(searchQuery));
     if (searchQuery.length > 2) {
       fetchData(searchQuery);
@@ -58,6 +61,10 @@ const Search: FC = () => {
       setVisibleNum(5);
     }
   }, [searchQuery]);
+
+  if (isLoading) {
+    return <Loader visible={isLoading} />;
+  }
 
   return (
     <Section variant="light">

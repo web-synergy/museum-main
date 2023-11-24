@@ -26,6 +26,5 @@ export const ModalContainer = styled(Box)(({ theme }) => ({
     borderRadius: '4px',
   },
 
-  [theme.breakpoints.up('md')]: { width: '734px' },
-  [theme.breakpoints.up('lg')]: {},
+  [theme.breakpoints.up('md')]: { width: '734px', maxHeight: '612px' },
 }));

@@ -1,6 +1,7 @@
-import { IconButton, Typography, Modal, Box } from '@mui/material';
+import { IconButton, Typography, Modal, Box, useTheme, useMediaQuery } from '@mui/material';
 import SvgSpriteIcon from '../Common/SvgSpriteIcon';
 import { ModalContainer } from './styles';
+import { theme } from '@/theme';
 
 interface IModalTeamCard {
   handleClose: () => void;
@@ -50,6 +51,49 @@ const teamsData = [
 ];
 
 const TeamCardModal = ({ handleClose, open }: IModalTeamCard) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const getColumnOrder = () => {
+    if (isSmallScreen) {
+      return teamsData.map((_, index) => [index]);
+    }
+
+    return [
+      [0, 3, 4],
+      [1, 5],
+      [2, 6],
+    ];
+  };
+
+  const columnOrder = getColumnOrder();
+
+  const renderColumns = (columnIndices: number[]) => (
+    <Box key={columnIndices[0]} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '40px' }}>
+      {columnIndices.map((index) => (
+        <Box key={index}>
+          <Typography variant="h6" sx={{ fontSize: '18px', fontWeight: '600', color: theme.palette.primary.main }}>
+            {teamsData[index].role}
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            {teamsData[index].members.map((member, memIndex) => (
+              <Typography
+                key={memIndex}
+                sx={{
+                  fontSize: '18px',
+                  fontWeight: '500',
+                  marginTop: { xs: '8px', md: '12px' },
+                  color: 'white',
+                }}>
+                {member}
+              </Typography>
+            ))}
+          </Box>
+        </Box>
+      ))}
+    </Box>
+  );
+
   return (
     <Modal open={open} onClose={handleClose}>
       <ModalContainer>
@@ -67,37 +111,21 @@ const TeamCardModal = ({ handleClose, open }: IModalTeamCard) => {
           }}>
           <SvgSpriteIcon svgSpriteId="burgerOpen_icon" />
         </IconButton>
-        {/* Заголовок модального вікна */}
         <Box sx={{ width: '100%', textAlign: 'center' }}>
-          <Typography variant="h5">Our great team</Typography>
+          <Typography variant="h5" sx={{ fontWeight: '600', lineHeight: 'normal' }}>
+            Our great team
+          </Typography>
         </Box>
-        {/* Контент модального вікна з командами та учасниками */}
         <Box
           sx={{
             width: '100%',
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: { md: 'space-between' },
             marginTop: '32px',
-            textAlign: 'center',
             gap: '40px',
           }}>
-          {teamsData.map((team, index) => (
-            <Box key={index}>
-              {/* Название роли */}
-              <Typography variant="h6" sx={{ color: 'orange', textAlign: 'center' }}>
-                {team.role}
-              </Typography>
-              {/* Список участников для каждой роли */}
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                {team.members.map((member, memIndex) => (
-                  <Typography key={memIndex} sx={{ marginTop: '8px', color: 'white', textAlign: 'center' }}>
-                    {member}
-                  </Typography>
-                ))}
-              </Box>
-            </Box>
-          ))}
+          {columnOrder.map((columnIndices) => renderColumns(columnIndices))}
         </Box>
       </ModalContainer>
     </Modal>

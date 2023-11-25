@@ -1,60 +1,19 @@
-import { IconButton, Typography, Modal, Box, useTheme, useMediaQuery } from '@mui/material';
+import { Box, IconButton, Modal, Typography, useMediaQuery, useTheme } from '@mui/material';
+import teamsData from '@/assets/teamsData';
 import SvgSpriteIcon from '../Common/SvgSpriteIcon';
+import ColumnsTeams from './ColumnsTeams';
 import { ModalContainer } from './styles';
-import { theme } from '@/theme';
 
 interface IModalTeamCard {
   handleClose: () => void;
   open: boolean;
 }
 
-// Об'єкт з командами та учасниками
-const teamsData = [
-  {
-    role: 'Business Analyst',
-    members: ['Maryna Yakovenko'],
-  },
-  {
-    role: 'Project Manager',
-    members: ['Anastasia Kuz'],
-  },
-  {
-    role: 'QA Mentor',
-    members: ['Yulia Klimuk'],
-  },
-  {
-    role: 'Design team',
-    members: ['Ilona Beneviat', 'Olga Lisniak', 'Mariia Popova'],
-  },
-  {
-    role: 'Front-end team',
-    members: ['Anna Prutnik', 'Andrii Bohonis', 'Artur Levchenko', 'Yevhen Onufrii', 'Stanislav Kuchma'],
-  },
-  {
-    role: 'Back-end team',
-    members: ['Evgeniy Malysh', 'Anatolii Omelchenko', 'Olha Ryzhkova', 'Andriy Sitarskiy', 'Vladyslav Bondyk', 'Dmytro Teliukov'],
-  },
-  {
-    role: 'QA team',
-    members: [
-      'Bohdan Stepanets',
-      'Pavlo Khlebnikov',
-      'Yuliia Hudyma',
-      'Alyona Slipak',
-      'Uliana Kravchuk',
-      'Lina Ragulina',
-      'Serhiy Shtefan-Antoniuk',
-    ],
-  },
-
-  // Добавьте другие роли и участников по мере необходимости
-];
-
 const TeamCardModal = ({ handleClose, open }: IModalTeamCard) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const getColumnOrder = () => {
+  const getTeamCardColumn = () => {
     if (isSmallScreen) {
       return teamsData.map((_, index) => [index]);
     }
@@ -66,33 +25,7 @@ const TeamCardModal = ({ handleClose, open }: IModalTeamCard) => {
     ];
   };
 
-  const columnOrder = getColumnOrder();
-
-  const renderColumns = (columnIndices: number[]) => (
-    <Box key={columnIndices[0]} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '40px' }}>
-      {columnIndices.map((index) => (
-        <Box key={index}>
-          <Typography variant="h6" sx={{ fontSize: '18px', fontWeight: '600', color: theme.palette.primary.main }}>
-            {teamsData[index].role}
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            {teamsData[index].members.map((member, memIndex) => (
-              <Typography
-                key={memIndex}
-                sx={{
-                  fontSize: '18px',
-                  fontWeight: '500',
-                  marginTop: { xs: '8px', md: '12px' },
-                  color: 'white',
-                }}>
-                {member}
-              </Typography>
-            ))}
-          </Box>
-        </Box>
-      ))}
-    </Box>
-  );
+  const columnOrder = getTeamCardColumn();
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -109,7 +42,7 @@ const TeamCardModal = ({ handleClose, open }: IModalTeamCard) => {
             top: '16px',
             right: '16px',
           }}>
-          <SvgSpriteIcon svgSpriteId="burgerOpen_icon" />
+          <SvgSpriteIcon fontSize="large" svgSpriteId="burgerOpen_icon" />
         </IconButton>
         <Box sx={{ width: '100%', textAlign: 'center' }}>
           <Typography variant="h5" sx={{ fontWeight: '600', lineHeight: 'normal' }}>
@@ -125,7 +58,9 @@ const TeamCardModal = ({ handleClose, open }: IModalTeamCard) => {
             marginTop: '32px',
             gap: '40px',
           }}>
-          {columnOrder.map((columnIndices) => renderColumns(columnIndices))}
+          {columnOrder.map((columnIndices, index) => (
+            <ColumnsTeams key={index} columnIndices={columnIndices} />
+          ))}
         </Box>
       </ModalContainer>
     </Modal>

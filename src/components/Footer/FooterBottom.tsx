@@ -1,8 +1,7 @@
+import { useState } from 'react';
 import { Box, IconButton, Link, Stack, Typography, styled, useMediaQuery, useTheme } from '@mui/material';
 import TeamCardModal from '../TeamCardModal/TeamCardModal';
-
 import SvgSpriteIcon from '../Common/SvgSpriteIcon';
-import { useState } from 'react';
 
 const TextLink = styled(Link)(({ theme }) => ({
   color: 'inherit',

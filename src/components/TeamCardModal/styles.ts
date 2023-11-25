@@ -8,6 +8,7 @@ export const ModalContainer = styled(Box)(({ theme }) => ({
   width: '100%',
   padding: '56px',
   outline: 'none',
+
   overflowY: 'auto',
   maxHeight: '100vh',
   backgroundColor: theme.palette.common.black,
@@ -19,12 +20,12 @@ export const ModalContainer = styled(Box)(({ theme }) => ({
     width: '6px',
   },
   '&::-webkit-scrollbar-track': {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: 'transparent',
   },
   '&::-webkit-scrollbar-thumb': {
     backgroundColor: theme.palette.primary.main,
     borderRadius: '4px',
   },
 
-  [theme.breakpoints.up('md')]: { width: '734px', maxHeight: '612px' },
+  [theme.breakpoints.up('md')]: { width: '734px', borderRadius: '25px' },
 }));

@@ -39,20 +39,22 @@ const FooterBottom = () => {
         <Typography variant="navigationRaleFooter">
           {isMobile ? (
             <>
-              {'Created by '}
-              <TextLink underline="always" onClick={handleClick}>
+              {'\u00A9 Created by '}
+              <TextLink sx={{ color: '#A17D21' }} underline="always" onClick={handleClick}>
                 team
               </TextLink>
+              {'.'}
               <br />
-              {'\u00A9 Всі права захищені'}
+              {' Всі права захищені'}
             </>
           ) : (
             <>
-              {'Created by '}
-              <TextLink underline="always" onClick={handleClick}>
+              {'\u00A9 Created by '}
+              <TextLink sx={{ color: '#A17D21' }} onClick={handleClick}>
                 team
               </TextLink>
-              {' \u00A9 Всі права захищені'}
+              {'.'}
+              {' Всі права захищені'}
             </>
           )}
         </Typography>

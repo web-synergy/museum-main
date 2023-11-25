@@ -6,7 +6,7 @@ const teamsData = [
   },
   {
     role: 'Project Manager',
-    members: [{ name: 'Anastasia Kuz', link: 'www.linkedin.com/in/anastasiiia-kuz' }],
+    members: [{ name: 'Anastasia Kuz', link: 'https://www.linkedin.com/in/anastasiiia-kuz' }],
   },
   {
     role: 'QA Mentor',

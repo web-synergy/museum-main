@@ -9,6 +9,7 @@ const MemberItem = ({ member }: ListItemProps) => {
   return (
     <ListItem
       sx={{
+        justifyContent: { xs: 'center', md: 'start' },
         width: '100%',
         padding: 0,
         textAlign: { xs: 'center', md: 'left' },
@@ -22,7 +23,7 @@ const MemberItem = ({ member }: ListItemProps) => {
         href={member.link}
         underline="hover"
         sx={{
-          width: '100%',
+          textAlign: { xs: 'center', md: 'center' },
           '&:hover': {
             color: theme.palette.action.hover,
           },

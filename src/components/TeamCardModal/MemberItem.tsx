@@ -18,7 +18,16 @@ const MemberItem = ({ member }: ListItemProps) => {
         marginTop: { xs: '8px', md: '12px' },
         color: theme.palette.common.white,
       }}>
-      <Link href={member.link} underline="hover" sx={{ width: '100%' }} target="_blank">
+      <Link
+        href={member.link}
+        underline="hover"
+        sx={{
+          width: '100%',
+          '&:hover': {
+            color: theme.palette.action.hover,
+          },
+        }}
+        target="_blank">
         {member.name}
       </Link>
     </ListItem>

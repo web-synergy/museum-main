@@ -37,7 +37,7 @@ const teamsData = [
       { name: 'Anatolii Omelchenko', link: 'https://www.linkedin.com/in/scream274/' },
       { name: 'Olha Ryzhkova', link: 'https://www.linkedin.com/in/olha-ryzhkova/' },
       { name: 'Andriy Sitarskiy', link: 'https://www.linkedin.com/in/andrey-sitarskiy-215787250/' },
-      { name: 'Vladyslav Bondyk', link: '#' },
+      { name: 'Vladyslav Bondyk', link: 'https://www.linkedin.com/in/vladyslav-bondyk/' },
       { name: 'Dmytro Teliukov', link: 'https://www.linkedin.com/in/dmytro-teliukov-927683236/' },
     ],
   },

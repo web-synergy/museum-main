@@ -37,26 +37,16 @@ const FooterBottom = () => {
           gap: { xs: '32px', lg: '0' },
         }}>
         <Typography variant="navigationRaleFooter">
-          {isMobile ? (
-            <>
-              {'\u00A9 Created by '}
-              <TextLink sx={{ color: '#A17D21' }} underline="always" onClick={handleClick}>
-                team
-              </TextLink>
-              {'.'}
-              <br />
-              {' Всі права захищені'}
-            </>
-          ) : (
-            <>
-              {'\u00A9 Created by '}
-              <TextLink sx={{ color: '#A17D21' }} onClick={handleClick}>
-                team
-              </TextLink>
-              {'.'}
-              {' Всі права захищені'}
-            </>
-          )}
+          <>
+            {'\u00A9 Created by '}
+            <TextLink sx={{ color: '#A17D21' }} underline="always" onClick={handleClick}>
+              team
+            </TextLink>
+            {'.'}
+            {isMobile ? <br /> : ''}
+
+            {' Всі права захищені'}
+          </>
         </Typography>
         <TextLink target="_blank" href="https://drive.google.com/file/d/1rQx-JY7Wl21UaxMojnHDzwfHUn7Je2Ip/view?usp=drive_link">
           <Typography variant="navigationRaleFooter">Політика конфіденційності</Typography>

@@ -45,7 +45,7 @@ export const palette: PaletteOptions = {
   },
   divider: '#878684',
   error: { main: '#DA1414' },
-  action: { disabledBackground: '#D0D0D0' },
+  action: { disabledBackground: '#D0D0D0', hover: '#676464' },
   gray: {
     main: '#D0D0D0',
     dark: '#878684',

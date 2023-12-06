@@ -28,13 +28,13 @@ const FooterBottom = () => {
         sx={{
           color: (theme) => theme.palette.text.secondary,
           display: 'flex',
-          justifyContent: { xs: 'center', lg: 'space-between' },
-          flexDirection: { xs: 'column', lg: 'row' },
+          justifyContent: 'center',
+          flexDirection: 'column',
           alignItems: 'center',
           wight: '100%',
           textAlign: 'center',
-          p: '24px 0px',
-          gap: { xs: '32px', lg: '0' },
+          p: '24px',
+          gap: '18px',
         }}>
         <Typography variant="navigationRaleFooter">
           <>
@@ -48,12 +48,6 @@ const FooterBottom = () => {
             {' Всі права захищені'}
           </>
         </Typography>
-        <TextLink target="_blank" href="https://drive.google.com/file/d/1rQx-JY7Wl21UaxMojnHDzwfHUn7Je2Ip/view?usp=drive_link">
-          <Typography variant="navigationRaleFooter">Політика конфіденційності</Typography>
-        </TextLink>
-        <TextLink target="_blank" href="https://drive.google.com/file/d/1LwTnn-6qpGVNR2h0DJ_e3VZTFD_CRqDd/view?usp=drive_link">
-          <Typography variant="navigationRaleFooter">Правила користування сайтом</Typography>
-        </TextLink>
         <Stack gap="13px" direction="row">
           <IconButton
             sx={{ p: 0, color: (theme) => theme.palette.common.white }}

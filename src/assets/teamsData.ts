@@ -10,7 +10,7 @@ const teamsData = [
   },
   {
     role: 'QA Mentor',
-    members: [{ name: 'Yulia Klimuk', link: 'https://www.linkedin.com/in/julia-klimuk/' }],
+    members: [{ name: 'Yuliia Klimuk', link: 'https://www.linkedin.com/in/julia-klimuk/' }],
   },
   {
     role: 'Design team',
@@ -51,7 +51,6 @@ const teamsData = [
       { name: 'Uliana Kravchuk', link: 'https://www.linkedin.com/in/uliana-kravchuk-931a7524b/' },
       { name: 'Lina Ragulina', link: 'https://www.linkedin.com/in/lina-ragulina-717a631a6/' },
       { name: 'Serhiy Shtefan-Antoniuk', link: 'https://www.linkedin.com/in/serhii-shtefan-antoniuk-91610b258/' },
-      { name: 'Julia Klimuk', link: 'https://www.linkedin.com/in/julia-klimuk/' },
     ],
   },
 ];

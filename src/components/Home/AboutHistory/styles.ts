@@ -23,6 +23,7 @@ export const InfoWrapper = styled(Box)(({ theme }) => ({
 export const Picture = styled('picture')({
   width: '100%',
   gridColumn: '1 / 3',
+  order: 2,
 });
 
 export const Img = styled('img')({

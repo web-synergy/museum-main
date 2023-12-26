@@ -92,11 +92,11 @@ const Events: FC = () => {
                             flexDirection: 'column',
                             gap: '16px',
                           }}>
-                          <Typography variant="h2">{truncateDescription(event.title, 100)}</Typography>
+                          <Typography variant="h2">{truncateDescription(event.title, 101)}</Typography>
                           <Typography variant="body1" sx={{ fontWeight: '600' }}>
                             {formatDate(event.begin, event.end)}
                           </Typography>
-                          <Typography variant="caption">{truncateDescription(event.summary, 150)}</Typography>
+                          <Typography variant="caption">{truncateDescription(event.summary, 151)}</Typography>
                         </Box>
                         <ButtonWithIcon
                           variant="tertiary"

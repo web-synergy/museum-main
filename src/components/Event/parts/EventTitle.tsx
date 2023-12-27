@@ -11,6 +11,7 @@ const EventTitle: FC<EventTitleProps> = ({ title, begin, end }) => {
   return (
     <Box
       sx={{
+        overflowWrap: 'anywhere',
         padding: {
           lg: '40px 0',
           md: '32px 0',

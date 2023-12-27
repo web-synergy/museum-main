@@ -40,6 +40,7 @@ const EventDetails: FC<EventDetailsProps> = ({ banner, content }) => {
   return (
     <Stack
       sx={{
+        overflowWrap: 'anywhere',
         rowGap: {
           lg: '40px',
           md: '32px',

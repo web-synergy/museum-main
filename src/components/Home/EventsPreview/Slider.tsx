@@ -50,7 +50,7 @@ const Slider: FC<IFullData> = ({ sliderInfo }) => {
         <SwiperSlide key={event.slug}>
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column-reverse', md: 'row' }, gap: { xs: '24px', lg: '26px' } }}>
             <Box sx={{ width: { xs: '100%', lg: '452px' }, display: 'flex', flexDirection: 'column', gap: { xs: '24px', lg: '40px' } }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px', overflowWrap: 'anywhere' }}>
                 <Typography sx={{ fontWeight: '500' }} variant="h3Kyiv" component="h3">
                   {event.title}
                 </Typography>
